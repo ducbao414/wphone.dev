@@ -6,7 +6,7 @@ export default {
   icon: Blocks,
   color: '#7A2FB0',
   category: 'game',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   fullscreen: true,
   keepAwake: true,

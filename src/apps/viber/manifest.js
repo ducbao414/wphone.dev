@@ -6,7 +6,7 @@ export default {
   icon: siViber,
   color: '#7360F2',
   category: 'app',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   publisher: "Viber Media S.à r.l.",
   description: "Viber lets you send free messages and make free calls to other Viber users on any device and network, in any country.",

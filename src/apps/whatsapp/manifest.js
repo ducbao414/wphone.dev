@@ -6,7 +6,7 @@ export default {
   icon: siWhatsapp,
   color: '#25D366',
   category: 'app',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   shareTarget: true,
   publisher: "WhatsApp Inc.",

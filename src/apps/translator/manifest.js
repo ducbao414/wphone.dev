@@ -6,7 +6,7 @@ export default {
   icon: Languages,
   color: '#0F8E8E',
   category: 'app',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   shareTarget: true,
   publisher: 'Microsoft Corporation',

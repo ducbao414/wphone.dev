@@ -5,7 +5,7 @@ export default {
   name: 'Voice Recorder',
   icon: Mic,
   category: 'app',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   publisher: 'Microsoft Corporation',
   description: 'Record voice memos, lectures and meetings. Recordings are saved to Music › Recordings.',

@@ -6,7 +6,7 @@ export default {
   icon: siTumblr,
   color: '#35465C',
   category: 'app',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   publisher: "Tumblr, Inc.",
   description: "Tumblr is where your interests connect you with your people. Follow blogs, reblog posts and share what you love.",

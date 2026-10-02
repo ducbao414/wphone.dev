@@ -4,7 +4,7 @@ export default {
   icon: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="9" height="9"/><rect x="13" y="2" width="9" height="9" opacity=".6"/><rect x="2" y="13" width="9" height="9" opacity=".6"/><rect x="13" y="13" width="9" height="9"/></svg>',
   color: '#E3A814',
   category: 'game',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   publisher: 'Windows Phone Games',
   description: 'Join the numbers and get to the 2048 tile! Swipe to move all tiles; when two tiles with the same number touch, they merge into one.',

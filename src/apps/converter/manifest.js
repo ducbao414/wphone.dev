@@ -5,7 +5,7 @@ export default {
   name: 'Unit Converter',
   icon: ArrowLeftRight,
   category: 'app',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   publisher: 'Microsoft Corporation',
   description: 'Convert length, weight, temperature, volume, area, speed, data, time and live currency exchange rates.',

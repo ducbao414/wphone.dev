@@ -6,7 +6,7 @@ export default {
   icon: siInstagram,
   color: '#3F729B',
   category: 'app',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   publisher: "Instagram",
   description: "Instagram is a fast, beautiful and fun way to share your life with friends. Snap a photo, choose a filter to transform its look and feel, then post it.",

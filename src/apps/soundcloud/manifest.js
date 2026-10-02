@@ -6,7 +6,7 @@ export default {
   icon: siSoundcloud,
   color: '#FF5500',
   category: 'app',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   publisher: "SoundCloud Ltd.",
   description: "Discover and stream millions of tracks from emerging artists, DJs and podcasters. Follow creators and like your favorite tracks.",

@@ -34,6 +34,7 @@ async function boot() {
   await notifications.load();
   await device.init();
   kernel.init();
+  await kernel.migrate();
   await initShell(os);
   await tiles.start();
   kernel.startBackgrounds();

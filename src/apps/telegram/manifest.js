@@ -6,7 +6,7 @@ export default {
   icon: siTelegram,
   color: '#2CA5E0',
   category: 'app',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   publisher: "Telegram Messenger LLP",
   description: "Telegram is a messaging app with a focus on speed and security. Sync your chats across devices and send files of any type.",

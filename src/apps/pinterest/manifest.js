@@ -6,7 +6,7 @@ export default {
   icon: siPinterest,
   color: '#BD081C',
   category: 'app',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   publisher: "Pinterest",
   description: "Pinterest is your catalog of ideas. Find recipes, home and style inspiration, and save them to boards.",

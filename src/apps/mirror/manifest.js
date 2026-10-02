@@ -5,7 +5,7 @@ export default {
   name: 'Mirror',
   icon: FlipHorizontal2,
   category: 'app',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   fullscreen: true,
   keepAwake: true,

@@ -6,7 +6,7 @@ export default {
   icon: siNetflix,
   color: '#E50914',
   category: 'app',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   publisher: "Netflix, Inc.",
   description: "Netflix members can instantly watch thousands of TV shows and movies. Start watching on your phone and continue on your TV.",

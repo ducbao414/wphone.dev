@@ -5,7 +5,7 @@ export default {
   name: 'Compass',
   icon: Compass,
   category: 'app',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   keepAwake: true,
   publisher: 'Microsoft Corporation',

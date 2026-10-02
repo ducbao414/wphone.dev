@@ -36,6 +36,17 @@ class Kernel extends Emitter {
   }
 
   /* ---------------- installation */
+  /** One-time upgrades for phones set up with an older app line-up. */
+  async migrate() {
+    const v = settings.get('appsVersion') || 1;
+    if (v < 2) {
+      // v2: every app ships preinstalled — add the former Store-only apps to existing phones once
+      const saved = settings.get('installed');
+      if (saved) await settings.set('installed', [...new Set([...saved, ...[...this.apps.values()].filter((a) => a.manifest.preinstalled !== false).map((a) => a.manifest.id)])]);
+      await settings.set('appsVersion', 2);
+    }
+  }
+
   installedIds() {
     const saved = settings.get('installed');
     const all = [...this.apps.values()].map((a) => a.manifest);

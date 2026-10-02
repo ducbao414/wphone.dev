@@ -6,7 +6,7 @@ export default {
   icon: Trophy,
   color: '#5133AB',
   category: 'app',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   tileSizes: ['small', 'medium', 'wide'],
   publisher: 'Microsoft Corporation',

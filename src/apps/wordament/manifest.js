@@ -6,7 +6,7 @@ export default {
   icon: ICON,
   color: '#E07B12',
   category: 'game',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   publisher: 'Microsoft Studios',
   description: 'The real-time word game. Swipe through adjacent letter tiles to find as many words as you can in two minutes. Rare letters and long words score more.',

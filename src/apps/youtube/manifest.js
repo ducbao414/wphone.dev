@@ -6,7 +6,7 @@ export default {
   icon: siYoutube,
   color: '#E52D27',
   category: 'app',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   publisher: "Google Inc.",
   description: "Watch the videos everyone is talking about. Browse channels, search for anything, and catch up on music, gaming, news and more.",

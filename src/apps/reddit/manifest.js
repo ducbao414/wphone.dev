@@ -6,7 +6,7 @@ export default {
   icon: siReddit,
   color: '#FF4500',
   category: 'app',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   publisher: "Reddit, Inc.",
   description: "Dive into anything. Reddit is home to thousands of communities, endless conversation and authentic human connection.",

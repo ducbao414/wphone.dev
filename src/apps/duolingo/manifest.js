@@ -6,7 +6,7 @@ export default {
   icon: siDuolingo,
   color: '#58CC02',
   category: 'app',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   publisher: "Duolingo",
   description: "Learn Spanish, French, German, Italian and more with bite-sized lessons. Earn points, level up and keep your streak alive.",

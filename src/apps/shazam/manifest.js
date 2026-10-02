@@ -6,7 +6,7 @@ export default {
   icon: siShazam,
   color: '#0088FF',
   category: 'app',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   publisher: "Shazam Entertainment Ltd.",
   description: "Shazam identifies any song in seconds. Discover artists, lyrics, videos and playlists, all for free.",

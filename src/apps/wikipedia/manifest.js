@@ -6,7 +6,7 @@ export default {
   icon: siWikipedia,
   color: '#1D1D1D',
   category: 'app',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   publisher: 'Wikimedia Foundation',
   description: 'The free encyclopedia. Search millions of articles, read today’s featured content and save articles to read offline.',

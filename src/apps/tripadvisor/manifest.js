@@ -6,7 +6,7 @@ export default {
   icon: siTripadvisor,
   color: '#00AF87',
   category: 'app',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   publisher: "TripAdvisor LLC",
   description: "Find the best hotels, restaurants and things to do with millions of reviews from real travelers.",

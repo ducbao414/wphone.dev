@@ -6,7 +6,7 @@ export default {
   icon: siWaze,
   color: '#33CCFF',
   category: 'app',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   publisher: "Waze Inc.",
   description: "Waze is the world’s largest community-based traffic and navigation app. Get real-time alerts about traffic, police, hazards and more.",

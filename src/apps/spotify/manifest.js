@@ -6,7 +6,7 @@ export default {
   icon: siSpotify,
   color: '#1DB954',
   category: 'app',
-  preinstalled: false,
+  preinstalled: true,
   pin: false,
   publisher: "Spotify AB",
   description: "Spotify gives you access to millions of songs. Listen to artists and albums, or create your own playlist of your favorite tracks.",
