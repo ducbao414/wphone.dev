@@ -5,6 +5,7 @@ import { ACCENTS } from '../os/theme.js';
 import * as ui from '../os/ui.js';
 import { device } from '../os/device.js';
 import { WIN_LOGO } from './shell.js';
+import { install } from '../os/install.js';
 
 export function runOOBE(os, shell) {
   return new Promise((resolve) => {
@@ -47,7 +48,9 @@ export function runOOBE(os, shell) {
     const s4 = () => {
       const loc = ui.toggle({ label: 'Location', description: 'Lets Weather, Maps and Cortana use your approximate city. Your phone never asks for your precise position.', value: true, onChange: (v) => settings.set('location', v) });
       step([el('div.oobe-title', 'PRIVACY'), el('div.oobe-big', 'a few settings'), loc.el,
-        el('p.subtle', 'On a phone, use your browser’s “Add to Home Screen” to run full screen like a real Windows Phone.'),
+        install.available ? el('div.oobe-install',
+          el('p.subtle', 'Add it to your home screen to open it full screen, like a real Windows Phone.'),
+          ui.button('add to home screen', () => install.prompt(os))) : null,
         el('div.oobe-actions', ui.button('finish', async () => {
           await settings.set('firstRun', false);
           layer.classList.add('oobe-out');

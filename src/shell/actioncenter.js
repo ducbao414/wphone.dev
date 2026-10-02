@@ -6,6 +6,7 @@ import { notifications } from '../os/notifications.js';
 import { device } from '../os/device.js';
 import { iconSVG, I } from '../os/icons.js';
 import { WIN_LOGO } from './shell.js';
+import { install } from '../os/install.js';
 import { Flashlight, Sun, RotateCcw, Fullscreen, BatteryCharging } from 'lucide';
 
 export function initActionCenter(os, shell) {
@@ -88,6 +89,7 @@ export function initActionCenter(os, shell) {
       qa,
       el('div.ac-links',
         el('button.ac-allsettings', { onclick: () => { close(); kernel.launch('settings'); } }, 'ALL SETTINGS'),
+        install.available ? el('button.ac-install', { onclick: () => { close(); install.prompt(os); } }, 'ADD TO HOME') : null,
         notifications.items.length ? el('button.ac-clear', { onclick: () => { notifications.clear(); } }, 'CLEAR ALL') : null),
       list,
       el('div.ac-handle'));

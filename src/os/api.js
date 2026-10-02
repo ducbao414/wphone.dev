@@ -13,6 +13,7 @@ import * as ui from './ui.js';
 import * as util from './util.js';
 import * as theme from './theme.js';
 import { I, icon, iconSVG } from './icons.js';
+import { install } from './install.js';
 import { pickFile, pickSave, share, openFile, appsForFile, fileIconFor } from './pickers.js';
 
 export const os = {
@@ -43,6 +44,8 @@ export const os = {
   // ui
   ui, util, theme, icons: { I, icon, iconSVG },
   pick: { file: pickFile, save: pickSave },
+  /** Add-to-home-screen: install.prompt(os), install.installed, install.canPrompt, install.isIOS */
+  install,
   share, openFile, appsForFile, fileIconFor,
   /** Lock the phone (shows lock screen). */
   lock: () => kernel.shell?.lock?.(),

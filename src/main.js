@@ -4,6 +4,7 @@ import '@fontsource/open-sans/600.css';
 import './styles/base.css';
 import './styles/controls.css';
 import './shell/shell.css';
+import { install } from './os/install.js'; // first: catch the browser's install event early
 
 import { openDB } from './os/db.js';
 import { settings } from './os/settings.js';
@@ -37,6 +38,8 @@ async function boot() {
   await kernel.migrate();
   await initShell(os);
   await tiles.start();
+  // Already running from the home screen: no need for the install tile
+  if (install.installed) { kernel.get('install') && (kernel.get('install').hidden = true); tiles.unpin('install'); }
   kernel.startBackgrounds();
   device.persistStorage?.();
   if ('serviceWorker' in navigator && import.meta.env.PROD) navigator.serviceWorker.register('/sw.js').catch(() => {});

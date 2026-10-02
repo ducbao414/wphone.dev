@@ -177,7 +177,8 @@
 .ac-q { aspect-ratio: 1; background: var(--chrome2); color: var(--fg); display: flex; flex-direction: column; justify-content: space-between; padding: 6px; text-align: left; }
 .ac-q.on { background: var(--accent); color: #fff; }
 .ac-q-label { font-size: 10px; line-height: 1.1; }
-.ac-links { display: flex; justify-content: space-between; padding: 10px var(--m) 6px; font-size: 12px; font-weight: 600; }
+.ac-clear { margin-left: auto; }
+.ac-links { display: flex; gap: 18px; padding: 10px var(--m) 6px; font-size: 12px; font-weight: 600; }
 .ac-list { padding: 0 var(--m); }
 .ac-group { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; margin: 12px 0 6px; color: var(--fg2); }
 .ac-item { background: var(--chrome2); padding: 8px 10px; margin-bottom: 4px; position: relative; transition: transform .15s; }
@@ -217,3 +218,6 @@
 .oobe .wp-toggle-track { border-color: #fff; }
 .oobe .wp-toggle-track::before { background: rgba(255,255,255,.5); }
 .oobe .wp-field-label { color: #fff; }
+
+.oobe-install { margin-top: 6px; }
+.oobe-install p { margin-bottom: 6px; }

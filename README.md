@@ -1,6 +1,6 @@
 # wphone — Windows Phone 8.1 in the browser
 
-**▶ Try it: [wphone.dev](https://wphone.dev)** — best on a phone (use “Add to Home Screen” for full screen).
+**▶ Try it: [wphone.dev](https://wphone.dev)** — best on a phone (tap the **Add to Home** tile to install it full screen).
 
 > **Built by Claude.** This project was designed and written end to end by Claude (Anthropic's Claude Opus 5.5, in Claude Code).
 > One Claude session planned the architecture, wrote the OS core, the shell, the backend and the app SDK, then ran seven Claude
@@ -84,7 +84,8 @@ Open http://localhost:5173. Camera and microphone require HTTPS or localhost.
 
 Desktop keyboard: `Esc`/`Backspace` = Back, `Home` = Start, `F2` = task switcher, `F3` = Cortana, `F4` = lock.
 Long-press Back = task switcher, long-press Search = talk to Cortana, pull down the status bar = Action Center,
-long-press a tile = edit Start. On a phone, "Add to Home Screen" runs it full screen.
+long-press a tile = edit Start. On a phone, the **Add to Home** tile on Start installs it to your home screen so it runs
+full screen (Chrome/Edge/Samsung Internet show the install dialog; on iPhone it explains Share → Add to Home Screen).
 
 ## Deploy
 

@@ -45,6 +45,12 @@ class Kernel extends Emitter {
       if (saved) await settings.set('installed', [...new Set([...saved, ...[...this.apps.values()].filter((a) => a.manifest.preinstalled !== false).map((a) => a.manifest.id)])]);
       await settings.set('appsVersion', 2);
     }
+    if ((settings.get('appsVersion') || 1) < 3) {
+      // v3: "Add to Home" tile — append it to existing Start layouts
+      const tiles = settings.get('tiles');
+      if (tiles && !tiles.some((t) => t.id === 'install')) await settings.set('tiles', [...tiles, { id: 'install', size: 'small' }]);
+      await settings.set('appsVersion', 3);
+    }
   }
 
   installedIds() {
@@ -103,6 +109,8 @@ class Kernel extends Emitter {
     if (!a) { this.os.ui.alert(`App "${id}" isn't available.`); return; }
     const m = a.manifest;
     if (m.external && !a.load) { window.open(m.external, '_blank', 'noopener'); return; }
+    // Action tiles run immediately (still inside the tap's user gesture) and open no window
+    if (m.action) { m.action(this.os, args); return; }
     if (!this.isInstalled(id) && !m.hidden) {
       if (await this.os.ui.confirm(`${m.name} isn't installed. Get it from the Store?`, 'Store', 'get', 'cancel')) this.launch('store', { app: id });
       return;
