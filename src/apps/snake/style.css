@@ -1,0 +1,20 @@
+.snake-menu .wp-page-title { color: #9fbd36; }
+.snake-banner { display: block; width: 100%; max-width: 340px; margin: 0 0 14px; }
+.snake-statgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
+.snake-stat { background: #7A9C1C; color: #fff; padding: 10px 12px; }
+.snake-stat-v { font-family: var(--font-light); font-weight: 300; font-size: 34px; line-height: 1.1; }
+.snake-stat-l { font-size: var(--fs-small); opacity: .85; text-transform: lowercase; }
+
+.snake-game { position: absolute; inset: 0; display: flex; flex-direction: column; background: #12160c; touch-action: none; user-select: none; }
+.snake-lcd { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 6px; }
+.snake-canvas { display: block; background: #9fbd36; box-shadow: inset 0 0 0 3px #2a3518, 0 0 0 4px #2b3220; }
+.snake-pad { flex: none; display: grid; grid-template-columns: repeat(3, 64px); grid-template-rows: repeat(3, 50px); gap: 6px; justify-content: center; padding: 8px 0 14px; }
+.snake-pad.hidden { display: none; }
+.snake-key { background: #2b3220; color: #b8d45a; display: flex; align-items: center; justify-content: center; touch-action: none; transition: background .08s; }
+.snake-key.down { background: #7A9C1C; color: #10140a; }
+.snake-key-up { grid-column: 2; grid-row: 1; }
+.snake-key-left { grid-column: 1; grid-row: 2; }
+.snake-key-mid { grid-column: 2; grid-row: 2; background: transparent; color: #5d6c3a; }
+.snake-key-right { grid-column: 3; grid-row: 2; }
+.snake-key-down { grid-column: 2; grid-row: 3; }
+@media (max-height: 560px) { .snake-pad { grid-template-rows: repeat(3, 40px); } }

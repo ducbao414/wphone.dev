@@ -1,0 +1,61 @@
+.g2048-menu .wp-page-title { display: none; }
+.g2048-logo { display: flex; gap: 6px; margin: 4px 0 22px; }
+.g2048-logo span { width: 62px; height: 62px; display: flex; align-items: center; justify-content: center; font-size: 38px; font-weight: 700; color: #fff; }
+.g2048-logo span:nth-child(1) { background: #eee4da; color: #776e65; }
+.g2048-logo span:nth-child(2) { background: #f59563; }
+.g2048-logo span:nth-child(3) { background: #f65e3b; }
+.g2048-logo span:nth-child(4) { background: #edc22e; }
+.g2048-statgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.g2048-stat { background: var(--chrome2); padding: 10px 12px; }
+.g2048-stat:nth-child(4n+1), .g2048-stat:nth-child(4n) { background: #edc22e; color: #fff; }
+.g2048-stat-v { font-family: var(--font-light); font-weight: 300; font-size: 32px; line-height: 1.1; }
+.g2048-stat-l { font-size: var(--fs-small); opacity: .85; }
+
+.g2048-game { position: absolute; inset: 0; bottom: var(--appbar-h); display: flex; flex-direction: column; padding: 12px var(--m) 10px; touch-action: none; background: var(--bg); }
+.g2048-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.g2048-title { font-family: var(--font-light); font-weight: 300; font-size: 58px; line-height: .95; letter-spacing: -0.03em; }
+.g2048-scores { display: flex; gap: 6px; }
+.g2048-score { position: relative; background: var(--chrome2); min-width: 72px; padding: 5px 10px 6px; text-align: right; }
+.g2048-score.best { background: #edc22e; color: #fff; }
+.g2048-score-l { font-size: 11px; text-transform: lowercase; opacity: .8; }
+.g2048-score-v { font-size: 22px; font-weight: 600; line-height: 1.1; }
+.g2048-plus { position: absolute; right: 10px; top: 18px; font-weight: 700; color: #edc22e; animation: g2048-plus .7s ease-out forwards; pointer-events: none; }
+@keyframes g2048-plus { to { transform: translateY(-34px); opacity: 0; } }
+.g2048-hint { color: var(--fg2); font-size: var(--fs-small); margin: 8px 0 10px; }
+.g2048-boardwrap { flex: 1; min-height: 0; display: flex; align-items: flex-start; justify-content: center; }
+.g2048-board { --gap: 8px; --ts: 70px; position: relative; background: var(--chrome); width: 300px; height: 300px; flex: none; }
+.g2048-cell, .g2048-tile { position: absolute; left: var(--gap); top: var(--gap); width: var(--ts); height: var(--ts);
+  transform: translate(calc(var(--c) * (var(--ts) + var(--gap))), calc(var(--r) * (var(--ts) + var(--gap)))); }
+.g2048-cell { background: var(--chrome2); }
+.g2048-tile { transition: transform 110ms ease-in-out; z-index: 2; }
+.g2048-tile-in { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: calc(var(--ts) * .46); background: #eee4da; color: #776e65; }
+.g2048-tile[data-len="3"] .g2048-tile-in { font-size: calc(var(--ts) * .38); }
+.g2048-tile[data-len="4"] .g2048-tile-in { font-size: calc(var(--ts) * .3); }
+.g2048-tile[data-len="5"] .g2048-tile-in, .g2048-tile[data-len="6"] .g2048-tile-in { font-size: calc(var(--ts) * .24); }
+.g2048-tile[data-v="4"] .g2048-tile-in { background: #ede0c8; }
+.g2048-tile[data-v="8"] .g2048-tile-in { background: #f2b179; color: #fff; }
+.g2048-tile[data-v="16"] .g2048-tile-in { background: #f59563; color: #fff; }
+.g2048-tile[data-v="32"] .g2048-tile-in { background: #f67c5f; color: #fff; }
+.g2048-tile[data-v="64"] .g2048-tile-in { background: #f65e3b; color: #fff; }
+.g2048-tile[data-v="128"] .g2048-tile-in { background: #edcf72; color: #fff; }
+.g2048-tile[data-v="256"] .g2048-tile-in { background: #edcc61; color: #fff; }
+.g2048-tile[data-v="512"] .g2048-tile-in { background: #edc850; color: #fff; }
+.g2048-tile[data-v="1024"] .g2048-tile-in { background: #edc53f; color: #fff; }
+.g2048-tile[data-v="2048"] .g2048-tile-in { background: #edc22e; color: #fff; box-shadow: 0 0 22px 4px rgba(237,194,46,.45); }
+.g2048-tile[data-v="super"] .g2048-tile-in { background: #3c3a32; color: #fff; }
+.g2048-tile.new .g2048-tile-in { animation: g2048-appear .2s ease-out both; animation-delay: 30ms; }
+.g2048-tile.merged { z-index: 3; }
+.g2048-tile.merged .g2048-tile-in { animation: g2048-pop .2s ease-out; }
+@keyframes g2048-appear { from { transform: scale(0); opacity: 0; } }
+@keyframes g2048-pop { 0% { transform: scale(0.8); } 50% { transform: scale(1.18); } 100% { transform: scale(1); } }
+.g2048-bump-left { animation: g2048-bl .15s; } .g2048-bump-right { animation: g2048-br .15s; }
+.g2048-bump-up { animation: g2048-bu .15s; } .g2048-bump-down { animation: g2048-bd .15s; }
+@keyframes g2048-bl { 50% { transform: translateX(-4px); } } @keyframes g2048-br { 50% { transform: translateX(4px); } }
+@keyframes g2048-bu { 50% { transform: translateY(-4px); } } @keyframes g2048-bd { 50% { transform: translateY(4px); } }
+.g2048-overlay { position: absolute; inset: 0; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0,0,0,.6); color: #fff; animation: fade-in .6s ease-out; text-align: center; padding: 16px; }
+.g2048-overlay.win { background: rgba(237,194,46,.75); }
+.g2048-ov-title { font-family: var(--font-light); font-weight: 300; font-size: 50px; line-height: 1.1; }
+.g2048-ov-sub { font-size: var(--fs-medium); margin: 4px 0 14px; opacity: .9; }
+.g2048-ov-buttons { display: flex; gap: 8px; }
+.g2048-ov-buttons .wp-button { border-color: #fff; color: #fff; margin: 0; }
+.g2048-overlay.win .wp-button.accent { background: #fff; color: #b8930f; border-color: #fff; }

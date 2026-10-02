@@ -1,0 +1,76 @@
+/* ---------- game surface ---------- */
+.sol-game { position: absolute; inset: 0; overflow: hidden; isolation: isolate; color: #fff; --fg: #fff; --fg2: rgba(255,255,255,.7); --bg: #000;
+  background: radial-gradient(ellipse 120% 80% at 50% 25%, #1f8645 0%, #0F5C2E 55%, #093d1e 100%); touch-action: none; }
+.sol-hud { position: absolute; left: 0; right: 0; top: 0; height: 34px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 12px; font-size: 16px; font-variant-numeric: tabular-nums; background: rgba(0,0,0,.18); }
+.sol-hud small { font-size: 12px; opacity: .7; text-transform: lowercase; }
+.sol-hud-time { font-family: var(--font-light); font-size: 20px; }
+.sol-board { position: absolute; left: 0; right: 0; top: 34px; bottom: var(--appbar-h); --cw: 42px; --ch: 59px; }
+.sol-game .wp-appbar { background: rgba(0,0,0,.4); color: #fff; }
+.sol-game .wp-appbar.open { background: rgba(10,30,18,.96); }
+
+/* ---------- slots ---------- */
+.sol-slot { position: absolute; left: 0; top: 0; width: var(--cw); height: var(--ch); border: 2px solid rgba(255,255,255,.22);
+  border-radius: calc(var(--cw) * .09); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.28);
+  font-size: calc(var(--cw) * .55); }
+.sol-slot-stock { cursor: pointer; }
+.sol-slot-tab { border-style: dashed; border-color: rgba(255,255,255,.12); }
+
+/* ---------- cards ---------- */
+.sol-card { position: absolute; left: 0; top: 0; width: var(--cw); height: var(--ch); cursor: pointer; touch-action: none;
+  transition: transform .26s var(--ease-out); will-change: transform; }
+.sol-noanim .sol-card { transition: none !important; }
+.sol-card.sol-dragging { transition: none; }
+.sol-card.sol-dragging > * { box-shadow: 0 6px 14px rgba(0,0,0,.45); }
+.sol-face, .sol-back { position: absolute; inset: 0; border-radius: calc(var(--cw) * .09); }
+.sol-face { display: none; background: #fdfdfb; color: #151515; border: 1px solid #a9a9a9; overflow: hidden; }
+.sol-card.up .sol-face { display: block; }
+.sol-card.up .sol-back { display: none; }
+.sol-card.red .sol-face { color: #d4111e; }
+.sol-corner { position: absolute; left: 5%; top: 1px; display: flex; align-items: baseline; font-weight: 700;
+  font-size: calc(var(--cw) * .37); line-height: 1.05; letter-spacing: -0.07em; font-family: 'Segoe UI', var(--font); }
+.sol-corner .sol-suit { font-size: .82em; margin-left: .12em; letter-spacing: 0; }
+.sol-pip { position: absolute; left: 0; right: 0; bottom: 5%; text-align: center; font-size: calc(var(--cw) * .66); line-height: 1; }
+.sol-pip.sol-court { left: 16%; right: 16%; bottom: 7%; top: 38%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  border: 1.5px solid currentColor; border-radius: 3px; font-size: calc(var(--cw) * .3); line-height: 1.05; font-weight: 700;
+  background: color-mix(in srgb, currentColor 8%, #fff); }
+.sol-back { background-color: #1d4f9a; border: 1px solid #0e2f60;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(255,255,255,.13) 0 2px, transparent 2px 6px),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,.13) 0 2px, transparent 2px 6px);
+  box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 3px #0e2f60; }
+.sol-card.sol-flip > .sol-face { animation: sol-flip .28s var(--ease-out); }
+@keyframes sol-flip { from { transform: scaleX(0); } to { transform: none; } }
+.sol-card.sol-shake > * { animation: sol-shake .32s; }
+@keyframes sol-shake { 20% { transform: translateX(-4px); } 40% { transform: translateX(4px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(2px); } }
+.sol-hint > *, .sol-slot.sol-hint { animation: sol-hint .65s 2; }
+@keyframes sol-hint { 50% { box-shadow: 0 0 0 3px #ffd400, 0 0 14px #ffd400; } }
+
+.sol-canvas { position: absolute; left: 0; top: 0; z-index: 5000; cursor: pointer; }
+
+.sol-autobtn { position: absolute; left: 50%; bottom: calc(var(--appbar-h) + 14px); transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
+  z-index: 4000; background: #fff; color: #0F5C2E; font-size: 16px; font-weight: 600; padding: 9px 22px; text-transform: lowercase;
+  transition: opacity .2s, transform .25s var(--ease-out); box-shadow: 0 4px 14px rgba(0,0,0,.35); }
+.sol-autobtn.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+
+/* ---------- menu ---------- */
+.sol-menu { background: var(--bg); }
+.sol-fan { position: relative; height: 112px; margin: 2px 0 12px; --cw: 62px; --ch: 87px; }
+.sol-fan .sol-card { left: 6px; top: 12px; cursor: default; transform-origin: 50% 120%;
+  transform: translateX(calc(var(--i) * 34px)) rotate(calc((var(--i) - 1.5) * 9deg)); animation: sol-fan-in .6s var(--ease-out) both;
+  animation-delay: calc(var(--i) * 70ms); }
+@keyframes sol-fan-in { from { transform: translateX(0) rotate(-20deg); opacity: 0; } }
+
+/* ---------- stats ---------- */
+.sol-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; }
+.sol-stat { padding: 4px 0; }
+.sol-stat-k { font-size: var(--fs-small); color: var(--fg2); }
+.sol-stat-v { font-family: var(--font-light); font-size: 30px; line-height: 1.1; }
+.sol-ach { display: flex; gap: 12px; align-items: center; padding: 7px 0; opacity: .45; }
+.sol-ach.on { opacity: 1; }
+.sol-ach-badge { width: 52px; height: 52px; flex: none; display: flex; align-items: center; justify-content: center; background: var(--chrome2); font-weight: 600; }
+.sol-ach.on .sol-ach-badge { background: #107C10; color: #fff; }
+.sol-ach-text { min-width: 0; }
+.sol-ach-title { font-size: var(--fs-large); font-family: var(--font-light); line-height: 1.2; }
+.sol-ach-desc { font-size: var(--fs-small); color: var(--fg2); }
+.sol-help { line-height: 1.45; color: var(--fg2); }

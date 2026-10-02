@@ -1,0 +1,64 @@
+/* Store */
+.store-pano .wp-pano-title { color: var(--fg); }
+.store-pano .wp-pano-bg { background: linear-gradient(120deg, var(--accent) 0%, transparent 55%); opacity: .35; }
+.store-icon { display: flex; align-items: center; justify-content: center; color: #fff; flex: none; }
+
+.store-row { display: flex; align-items: center; gap: 14px; min-height: 56px; }
+.store-row-text { flex: 1; min-width: 0; }
+.store-row-name { font-family: var(--font-light); font-size: var(--fs-large); line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.store-row-meta { display: flex; align-items: center; gap: 10px; font-size: var(--fs-small); color: var(--fg2); margin-top: 2px; }
+.store-row-status { text-transform: lowercase; }
+
+.store-stars { position: relative; display: inline-block; font-size: 13px; line-height: 1; letter-spacing: 1px; white-space: nowrap; vertical-align: middle; }
+.store-stars.big { font-size: 22px; }
+.store-stars-bg { color: var(--fg3); }
+.store-stars-fg { position: absolute; left: 0; top: 0; overflow: hidden; color: var(--accent); }
+
+/* featured banner */
+.store-banner { position: relative; height: 190px; color: #fff; padding: 14px; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; cursor: pointer; }
+.store-banner.store-flip { animation: store-flip .5s var(--ease-out); }
+@keyframes store-flip { from { transform: perspective(700px) rotateX(-60deg); opacity: 0; transform-origin: top; } to { transform: none; opacity: 1; } }
+.store-banner-icon { position: absolute; right: 14px; top: 14px; opacity: .95; }
+.store-banner-text { position: relative; max-width: 100%; }
+.store-banner-name { font-family: var(--font-light); font-size: 30px; line-height: 1.1; }
+.store-banner-desc { font-size: var(--fs-small); opacity: .9; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin: 2px 0 4px; }
+.store-banner-meta { font-size: var(--fs-small); display: flex; gap: 6px; align-items: center; }
+.store-banner-meta .store-stars-fg { color: #fff; }
+.store-banner-meta .store-stars-bg { color: rgba(255,255,255,.35); }
+.store-banner-dots { display: flex; gap: 6px; margin: 8px 0 16px; }
+.store-banner-dots i { width: 6px; height: 6px; background: var(--fg3); }
+.store-banner-dots i.on { background: var(--accent); }
+.store-cats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.store-cat { aspect-ratio: 2 / 1; background: var(--accent); color: #fff; display: flex; flex-direction: column; justify-content: space-between; padding: 10px; cursor: pointer; }
+.store-cat-label { font-size: var(--fs-normal); text-transform: lowercase; }
+
+/* details */
+.store-d-head { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 14px; }
+.store-d-headtext { min-width: 0; }
+.store-d-name { font-family: var(--font-light); font-size: var(--fs-xl); line-height: 1.1; word-break: break-word; }
+.store-d-pub { color: var(--fg2); font-size: var(--fs-small); margin: 2px 0 6px; }
+.store-d-rating { font-size: var(--fs-small); color: var(--fg2); }
+.store-d-price { font-size: var(--fs-medium); margin-top: 4px; }
+.store-actions { min-height: 4px; }
+.store-progress:not(:empty) { margin: 6px 0 14px; }
+.store-progress-label { font-size: var(--fs-small); color: var(--fg2); margin-bottom: 6px; }
+.store-d-desc { line-height: 1.45; margin: 12px 0 16px; font-size: var(--fs-normal); }
+.store-d-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; margin-bottom: 16px; }
+.store-fact-k { color: var(--fg2); font-size: var(--fs-small); }
+.store-fact-v { font-size: var(--fs-normal); word-break: break-word; }
+
+/* reviews */
+.store-r-summary { display: flex; align-items: center; gap: 16px; margin: 4px 0 10px; }
+.store-r-big { font-family: var(--font-light); font-size: 64px; line-height: 1; }
+.store-review { padding: 10px 0; border-bottom: 1px solid color-mix(in srgb, var(--fg3) 50%, transparent); }
+.store-review-top { display: flex; justify-content: space-between; align-items: center; font-size: var(--fs-small); }
+.store-review-text { margin: 6px 0 4px; line-height: 1.4; }
+.store-review-by { font-size: var(--fs-small); color: var(--fg2); }
+.store-rate-stars { display: flex; gap: 6px; margin-bottom: 14px; }
+.store-rate-star { color: var(--fg3); }
+.store-rate-star.on { color: var(--accent); }
+.store-rate-star.on svg { fill: currentColor; }
+
+/* search / updates */
+.store-search-box { margin-bottom: 12px; }
+.store-upd-title { font-family: var(--font-light); font-size: var(--fs-large); margin-bottom: 4px; }

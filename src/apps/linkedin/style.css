@@ -1,0 +1,41 @@
+/* LinkedIn landing page (generated per-app, classes prefixed with "linkedin-") */
+.linkedin-link { position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden; background: var(--brand); color: var(--brand-fg); display: flex; flex-direction: column; padding: 0 var(--m) 28px; -webkit-overflow-scrolling: touch; }
+.linkedin-top { padding-top: 16px; }
+.linkedin-app { font-size: var(--fs-app-title); font-weight: 600; letter-spacing: .02em; opacity: .85; }
+.linkedin-hero { display: flex; flex-direction: column; align-items: flex-start; padding: 8vh 0 24px; min-height: 0; }
+.linkedin-logo { width: 120px; height: 120px; display: flex; align-items: center; justify-content: center; animation: linkedin-pop .6s var(--ease-out, cubic-bezier(.1,.9,.2,1)) both; }
+.linkedin-logo .icon { width: 84px; height: 84px; }
+.linkedin-name { font-family: var(--font-light); font-weight: 300; font-size: 54px; line-height: 1.05; letter-spacing: -.02em; margin: 14px 0 6px -3px; animation: linkedin-in .5s .08s var(--ease-out, ease-out) both; }
+.linkedin-tagline { font-size: var(--fs-medium); line-height: 1.35; opacity: .9; max-width: 30em; animation: linkedin-in .5s .14s var(--ease-out, ease-out) both; }
+.linkedin-actions { display: flex; flex-direction: column; gap: 10px; animation: linkedin-in .5s .2s var(--ease-out, ease-out) both; }
+.linkedin-btn { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 60px; padding: 8px 16px; border: 2px solid var(--brand-fg); background: var(--brand); color: var(--brand-fg); text-align: left; font: inherit; cursor: pointer; }
+.linkedin-btn.primary { background: var(--brand-fg); color: var(--brand); }
+.linkedin-btn:active { opacity: .8; }
+.linkedin-btn-icon { display: flex; flex: none; }
+.linkedin-btn-text { display: flex; flex-direction: column; min-width: 0; }
+.linkedin-btn-label { font-size: var(--fs-large); font-family: var(--font-light); line-height: 1.15; text-transform: lowercase; }
+.linkedin-btn-sub { font-size: var(--fs-small); opacity: .75; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.linkedin-fallback { border-left: 4px solid var(--brand-fg); padding: 6px 0 6px 12px; animation: linkedin-in .3s both; }
+.linkedin-fallback[hidden] { display: none; }
+.linkedin-fb-text { font-size: var(--fs-normal); opacity: .9; margin-bottom: 6px; }
+.linkedin-fb-btn { background: none; border: 0; color: var(--brand-fg); font: inherit; font-size: var(--fs-medium); text-decoration: underline; padding: 4px 0; cursor: pointer; }
+.linkedin-tool { margin-top: 26px; padding-top: 4px; transition: background .3s; animation: linkedin-in .5s .26s var(--ease-out, ease-out) both; }
+.linkedin-tool.flash { background: rgba(255,255,255,.12); }
+.linkedin-tool-title { font-family: var(--font-light); font-size: var(--fs-xl); text-transform: lowercase; margin-bottom: 10px; }
+.linkedin-field { display: flex; align-items: stretch; background: rgba(255,255,255,.92); color: #111; margin-bottom: 8px; border: 2px solid transparent; }
+.linkedin-field:focus-within { background: #fff; border-color: rgba(0,0,0,.35); }
+.linkedin-prefix { display: flex; align-items: center; padding-left: 10px; color: #666; font-size: var(--fs-medium); }
+.linkedin-input { flex: 1; min-width: 0; width: 100%; border: 0; outline: 0; background: transparent; color: #111; font: inherit; font-size: var(--fs-medium); padding: 9px 10px; border-radius: 0; appearance: none; resize: none; }
+.linkedin-input::placeholder { color: #888; }
+.linkedin-tool-row { display: flex; align-items: center; justify-content: flex-end; gap: 14px; }
+.linkedin-count { font-size: var(--fs-small); opacity: .8; }
+.linkedin-count.low { font-weight: 700; opacity: 1; }
+.linkedin-go { min-height: 42px; padding: 4px 20px 6px; border: 2px solid var(--brand-fg); background: var(--brand); color: var(--brand-fg); font: inherit; font-size: var(--fs-normal); text-transform: lowercase; cursor: pointer; }
+.linkedin-go:active { background: var(--brand-fg); color: var(--brand); }
+.linkedin-foot { margin-top: auto; padding-top: 30px; font-size: var(--fs-small); opacity: .6; }
+@keyframes linkedin-pop { from { transform: scale(.6) rotateY(-60deg); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes linkedin-in { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (min-height: 760px) { .linkedin-hero { padding-top: 12vh; } }
+
+/* sections keep their natural height; the page scrolls instead of squeezing them into each other */
+.linkedin-link > * { flex-shrink: 0; }

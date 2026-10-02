@@ -1,0 +1,53 @@
+.wikipedia-error { color: var(--fg2); font-size: var(--fs-medium); padding: 16px 0; line-height: 1.4; }
+.wikipedia-error .wp-button { margin-top: 12px; }
+.wikipedia-feature { margin-bottom: 8px; }
+.wikipedia-feature-img { height: 180px; background: var(--chrome2) center/cover no-repeat; margin-bottom: 10px; }
+.wikipedia-feature-title { font-family: var(--font-light); font-size: var(--fs-xl); line-height: 1.1; }
+.wikipedia-feature-desc { color: var(--fg2); font-size: var(--fs-small); margin-top: 2px; }
+.wikipedia-feature-extract { font-size: var(--fs-normal); line-height: 1.45; margin-top: 8px; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+.wikipedia-noimg { display: flex; align-items: center; justify-content: center; font-family: Georgia, 'Times New Roman', serif; font-size: 26px; color: var(--fg2); }
+.wikipedia-potd img { width: 100%; max-height: 260px; object-fit: cover; display: block; background: var(--chrome2); }
+.wikipedia-potd-cap { font-size: var(--fs-small); color: var(--fg2); margin-top: 6px; line-height: 1.4; }
+.wikipedia-potd-cap a { color: inherit; text-decoration: none; }
+.wikipedia-news { font-size: var(--fs-normal); line-height: 1.45; margin-bottom: 12px; padding-left: 12px; border-left: 3px solid var(--accent); }
+.wikipedia-news a, .wikipedia-article a { color: var(--accent); text-decoration: none; }
+.wikipedia-otd { display: flex; gap: 14px; padding: 8px 0; }
+.wikipedia-otd-year { font-family: var(--font-light); font-size: var(--fs-large); color: var(--accent); min-width: 58px; line-height: 1.1; }
+.wikipedia-otd-text { font-size: var(--fs-normal); line-height: 1.4; }
+
+.wikipedia-article-page { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--fg); }
+.wikipedia-app-title { padding: 16px var(--m) 4px; flex: none; }
+.wikipedia-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 0 var(--m) calc(var(--appbar-h) + 30px); -webkit-overflow-scrolling: touch; }
+.wikipedia-hero { height: 190px; margin: 6px calc(-1 * var(--m)) 12px; background: var(--chrome2) center 25%/cover no-repeat; }
+.wikipedia-title { font-family: Georgia, 'Linux Libertine', 'Times New Roman', serif; font-weight: 400; font-size: 34px; line-height: 1.1; margin: 6px 0 4px; word-break: break-word; }
+.wikipedia-desc { color: var(--fg2); font-size: var(--fs-normal); margin-bottom: 10px; }
+.wikipedia-head { padding-bottom: 6px; border-bottom: 1px solid var(--fg3); margin-bottom: 12px; }
+
+.wikipedia-article { font-size: calc(16px * var(--font-scale, 1)); line-height: 1.6; word-wrap: break-word; overflow-wrap: anywhere; user-select: text; -webkit-user-select: text; }
+.wikipedia-article p { margin: 0 0 12px; }
+.wikipedia-article h3, .wikipedia-article h4 { font-family: var(--font); font-weight: 600; font-size: 18px; margin: 18px 0 6px; }
+.wikipedia-article ul, .wikipedia-article ol { padding-left: 22px; margin: 0 0 12px; }
+.wikipedia-article img { max-width: 100%; height: auto; vertical-align: middle; }
+.wikipedia-article sup { font-size: 11px; line-height: 0; }
+.wikipedia-article blockquote { margin: 10px 0; padding-left: 12px; border-left: 3px solid var(--fg3); color: var(--fg2); }
+.wikipedia-article figure, .wikipedia-article .wk-thumb { margin: 12px 0; }
+.wikipedia-article figcaption, .wikipedia-article .wk-thumbcaption { font-size: 13px; color: var(--fg2); line-height: 1.4; margin-top: 4px; }
+.wikipedia-article .wk-hatnote { font-style: italic; color: var(--fg2); font-size: 14px; margin-bottom: 10px; }
+.wikipedia-article .wk-table-wrap { overflow-x: auto; margin: 10px 0 14px; max-width: 100%; }
+.wikipedia-article table { border-collapse: collapse; font-size: 13px; line-height: 1.4; }
+.wikipedia-article td, .wikipedia-article th { border: 1px solid var(--fg3); padding: 4px 6px; vertical-align: top; text-align: left; }
+.wikipedia-article th { background: var(--chrome2); }
+.wikipedia-article .wk-infobox { width: 100%; }
+.wikipedia-article .wk-infobox caption, .wikipedia-article .wk-infobox-title { font-size: 17px; font-weight: 600; padding: 4px 0; text-align: left; }
+.wikipedia-article .wk-infobox td, .wikipedia-article .wk-infobox th { border-width: 0 0 1px 0; }
+.wikipedia-article .wk-references, .wikipedia-article .wk-reflist { font-size: 13px; }
+.wikipedia-article .wk-gallery { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.wikipedia-article .wk-gallery li { width: calc(50% - 4px); }
+.wikipedia-article .wk-nowrap { white-space: nowrap; }
+.wikipedia-section { border-bottom: 1px solid var(--fg3); }
+.wikipedia-section-head { display: flex; align-items: center; gap: 10px; font-family: Georgia, 'Times New Roman', serif; font-size: 23px; padding: 12px 0; cursor: pointer; line-height: 1.2; }
+.wikipedia-chev { width: 10px; height: 10px; border-right: 2px solid var(--fg2); border-bottom: 2px solid var(--fg2); transform: rotate(-45deg); transition: transform .2s; flex: none; margin-right: 4px; }
+.wikipedia-section.open .wikipedia-chev { transform: rotate(45deg); }
+.wikipedia-section-body { display: none; padding-bottom: 10px; }
+.wikipedia-section.open .wikipedia-section-body { display: block; }
+.wikipedia-flash { background: color-mix(in srgb, var(--accent) 35%, transparent); transition: background 1s; }

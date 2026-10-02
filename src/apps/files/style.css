@@ -1,0 +1,39 @@
+.files-page .wp-page-content { padding-top: 4px; }
+.files-crumbs { display: flex; align-items: center; gap: 6px; white-space: nowrap; overflow-x: auto; color: var(--fg2); font-size: var(--fs-small); padding: 6px 0 2px; }
+.files-crumb { cursor: pointer; padding: 4px 0; }
+.files-crumb.current { color: var(--fg); cursor: default; }
+.files-crumb-sep { opacity: .6; }
+.files-picker-crumbs { padding: 0 var(--m) 10px; display: block; }
+
+.files-summary { margin: 4px 0 14px; }
+.files-summary-row { display: flex; align-items: center; gap: 14px; cursor: pointer; }
+.files-summary-icon { width: 52px; height: 52px; flex: none; display: flex; align-items: center; justify-content: center; background: var(--accent); color: #fff; }
+.files-summary-title { font-family: var(--font-light); font-size: var(--fs-large); line-height: 1.2; }
+.files-summary-sub { color: var(--fg2); font-size: var(--fs-small); }
+.files-summary-bar { height: 6px; background: var(--fg3); margin-top: 10px; }
+.files-summary-fill { height: 100%; background: var(--accent); }
+
+.files-search { margin: 0 0 10px; }
+.files-search-input { font-size: var(--fs-medium); }
+
+.files-row { display: flex; align-items: center; gap: 14px; min-height: 56px; position: relative; }
+.files-icon { width: 52px; height: 52px; flex: none; display: flex; align-items: center; justify-content: center; background: var(--chrome2); color: var(--fg); background-size: cover; background-position: center; }
+.files-icon.files-t-dir { background: var(--accent); color: #fff; }
+.files-icon.files-t-word { background: #2B579A; color: #fff; }
+.files-icon.files-t-excel { background: #217346; color: #fff; }
+.files-icon.files-t-note { background: #7719AA; color: #fff; }
+.files-icon.files-t-pdf { background: #C8102E; color: #fff; }
+.files-icon.files-t-aud { background: #E3008C; color: #fff; }
+.files-icon.files-t-vid { background: #A05000; color: #fff; }
+.files-icon.files-thumb { background-color: var(--chrome2); }
+.files-path { font-size: 12px; color: var(--fg3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.files-check { display: none; width: 28px; height: 28px; flex: none; border: 2px solid var(--fg); align-items: center; justify-content: center; color: transparent; }
+.files-selecting .files-check { display: flex; }
+.files-row.selected .files-check { background: var(--accent); border-color: var(--accent); color: #fff; }
+.files-selecting .files-row.selected { background: transparent; }
+.files-list .wp-list-item.selected { background: transparent; }
+
+.files-drop .files-page::after { content: 'drop to add files here'; position: absolute; inset: 8px; border: 3px dashed var(--accent); display: flex; align-items: center; justify-content: center; font-size: var(--fs-large); font-family: var(--font-light); background: color-mix(in srgb, var(--bg) 80%, transparent); pointer-events: none; z-index: 30; }
+
+.files-picker .wp-list { flex: 1; overflow-y: auto; padding: 0 var(--m) calc(var(--appbar-h) + 20px); }

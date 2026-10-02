@@ -1,0 +1,39 @@
+.radio-main { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--fg); container-type: inline-size; padding-bottom: calc(var(--appbar-h) + 8px); overflow: hidden; }
+.radio-apptitle { padding: 16px var(--m) 0; }
+.radio-source { margin: 2px var(--m) 0; font-family: var(--font-light); font-size: var(--fs-large); color: var(--fg2); text-transform: lowercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; align-self: flex-start; max-width: calc(100% - 2 * var(--m)); }
+.radio-body { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 var(--m); overflow: hidden; }
+.radio-freqrow { display: flex; align-items: center; gap: 4px; margin-left: -10px; margin-right: -10px; }
+.radio-seek { width: 44px; height: 80px; display: flex; align-items: center; justify-content: center; color: var(--fg2); flex: none; }
+.radio-seek:active { color: var(--accent); }
+.radio-freqbox { flex: 1; min-width: 0; display: flex; align-items: baseline; justify-content: center; gap: 6px; }
+.radio-freq { font-family: var(--font-light); font-weight: 200; font-size: min(118px, 30cqw); line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+.radio-mhz { font-size: var(--fs-medium); color: var(--fg2); }
+.radio-main.on-air .radio-freq { color: var(--accent); }
+.radio-logo { height: 56px; margin: 14px 0 6px; display: flex; justify-content: center; }
+.radio-logo img { height: 56px; max-width: 120px; object-fit: contain; background: #fff; }
+.radio-name { font-family: var(--font-light); font-size: var(--fs-xl); text-align: center; line-height: 1.15; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; word-break: break-word; }
+.radio-sub { font-size: var(--fs-small); color: var(--fg2); text-align: center; margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.radio-status { font-size: var(--fs-small); color: var(--accent); text-align: center; margin-top: 6px; min-height: 18px; text-transform: lowercase; }
+.radio-main.loading .radio-name { animation: radio-pulse 1s infinite alternate; }
+@keyframes radio-pulse { from { opacity: .4; } }
+
+.radio-dial-wrap { position: relative; flex: none; height: 96px; border-top: 1px solid var(--fg3); border-bottom: 1px solid var(--fg3); margin-bottom: 4px; }
+.radio-dial { position: absolute; inset: 0; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; padding: 0 calc(50% - 42px); touch-action: pan-x; cursor: grab; }
+.radio-cell { flex: 0 0 84px; height: 100%; scroll-snap-align: center; display: flex; flex-direction: column; position: relative; cursor: pointer; }
+.radio-cell-freq { height: 40px; display: flex; align-items: flex-end; justify-content: center; font-size: var(--fs-normal); color: var(--fg2); font-variant-numeric: tabular-nums; transition: color .2s, transform .2s; }
+.radio-cell.sel .radio-cell-freq { color: var(--fg); transform: scale(1.2); }
+.radio-cell-ticks { flex: 1; margin-top: 8px; background:
+  linear-gradient(var(--fg2), var(--fg2)) center top / 2px 70% no-repeat,
+  repeating-linear-gradient(to right, transparent 0 13px, var(--fg3) 13px 14px) 0 0 / 100% 40% repeat-x; }
+.radio-needle { position: absolute; left: 50%; top: 0; bottom: 0; width: 4px; margin-left: -2px; background: var(--accent); pointer-events: none; }
+
+.radio-favmark { color: var(--accent); }
+.radio-favmark svg { fill: currentColor; }
+.radio-row-playing .wp-row-title { color: var(--accent); }
+.radio-genres { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.radio-genre { background: var(--accent); color: #fff; aspect-ratio: 2 / 1; display: flex; align-items: flex-end; padding: 8px 10px; font-size: var(--fs-large); font-family: var(--font-light); text-transform: lowercase; cursor: pointer; }
+.radio-genre:nth-child(3n+2) { background: color-mix(in srgb, var(--accent) 75%, #000); }
+.radio-genre:nth-child(3n) { background: color-mix(in srgb, var(--accent) 55%, #000); }
+.radio-searchrow { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+.radio-searchrow .wp-textbox { flex: 1; }
+.radio-searchbtn { margin: 0; padding: 6px 10px; min-width: 48px; }

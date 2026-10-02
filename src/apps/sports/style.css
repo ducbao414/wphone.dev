@@ -1,0 +1,43 @@
+.sports-loading { margin: 0 0 8px; }
+.sports-msg { font-size: 13px; color: var(--fg2); background: var(--chrome); padding: 8px 10px; margin: 2px 0 10px; line-height: 1.35; }
+.sports-msg.plain { background: none; padding: 0; }
+.sports-hero { position: relative; height: 210px; margin: 2px 0 12px; overflow: hidden; background: var(--chrome2); cursor: pointer; }
+.sports-hero-img { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.sports-hero-text { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 12px 10px; background: linear-gradient(transparent, rgba(0,0,0,.82)); color: #fff; }
+.sports-hero-title { font-size: 21px; line-height: 1.2; font-weight: 600; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.sports-hero-meta { font-size: 12px; opacity: .85; margin-top: 4px; }
+.sports-item { display: flex; gap: 12px; align-items: flex-start; padding: 2px 0 4px; }
+.sports-item-text { flex: 1; min-width: 0; }
+.sports-item-title { font-size: 17px; line-height: 1.25; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.sports-item-meta { font-size: 12px; color: var(--fg2); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sports-thumb { width: 92px; height: 64px; flex: none; background: var(--chrome2) center/cover; }
+
+.sports-reader .wp-page-header { padding-bottom: 0; }
+.sports-rsource { font-size: 12px; color: var(--accent); font-weight: 600; letter-spacing: .04em; }
+.sports-rtitle { font-family: var(--font-light); font-weight: 300; font-size: 30px; line-height: 1.12; margin: 4px 0 8px; user-select: text; -webkit-user-select: text; }
+.sports-rmeta { font-size: 12px; color: var(--fg2); margin-bottom: 12px; }
+.sports-rhero { width: calc(100% + 2 * var(--m)); margin: 0 calc(-1 * var(--m)) 14px; display: block; background: var(--chrome2); max-height: 320px; object-fit: cover; }
+.sports-rbyline { font-size: 13px; color: var(--fg2); margin-bottom: 12px; }
+.sports-article { font-size: 16px; line-height: 1.6; user-select: text; -webkit-user-select: text; word-wrap: break-word; }
+.sports-article.big { font-size: 19px; }
+.sports-article p { margin: 0 0 14px; }
+.sports-article ul { margin: 0 0 14px; padding-left: 20px; }
+.sports-article li { margin-bottom: 6px; }
+.sports-article h2, .sports-article h3 { font-weight: 600; font-size: 1.15em; margin: 20px 0 8px; }
+.sports-article blockquote { border-left: 3px solid var(--accent); margin: 0 0 14px; padding: 2px 0 2px 12px; color: var(--fg2); font-style: italic; }
+.sports-rnote { font-size: 12px; color: var(--fg2); margin: 18px 0 6px; }
+
+.sports-league { font-size: 26px; font-family: var(--font-light); display: inline-flex; align-items: baseline; gap: 4px; margin: 0 0 2px; cursor: pointer; }
+.sports-league span { font-size: 14px; color: var(--fg2); }
+.sports-game { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid color-mix(in srgb, var(--fg3) 35%, transparent); cursor: pointer; }
+.sports-game.live { border-left: 3px solid var(--accent); padding-left: 8px; }
+.sports-teams { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.sports-team { display: flex; align-items: center; gap: 8px; font-size: 17px; color: var(--fg2); }
+.sports-team.win { color: var(--fg); font-weight: 600; }
+.sports-logo { width: 24px; height: 24px; object-fit: contain; flex: none; display: inline-block; }
+.sports-tname { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sports-score { font-size: 19px; min-width: 28px; text-align: right; color: var(--fg); }
+.sports-status { width: 92px; flex: none; text-align: right; font-size: 12px; color: var(--fg2); }
+.sports-status b { color: var(--accent); font-size: 11px; letter-spacing: .05em; }
+.sports-venue { font-size: 10px; color: var(--fg3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+.sports-src { font-size: 11px; color: var(--fg3); margin: 16px 0; }

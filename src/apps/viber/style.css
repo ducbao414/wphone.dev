@@ -1,0 +1,41 @@
+/* Viber landing page (generated per-app, classes prefixed with "viber-") */
+.viber-link { position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden; background: var(--brand); color: var(--brand-fg); display: flex; flex-direction: column; padding: 0 var(--m) 28px; -webkit-overflow-scrolling: touch; }
+.viber-top { padding-top: 16px; }
+.viber-app { font-size: var(--fs-app-title); font-weight: 600; letter-spacing: .02em; opacity: .85; }
+.viber-hero { display: flex; flex-direction: column; align-items: flex-start; padding: 8vh 0 24px; min-height: 0; }
+.viber-logo { width: 120px; height: 120px; display: flex; align-items: center; justify-content: center; animation: viber-pop .6s var(--ease-out, cubic-bezier(.1,.9,.2,1)) both; }
+.viber-logo .icon { width: 84px; height: 84px; }
+.viber-name { font-family: var(--font-light); font-weight: 300; font-size: 54px; line-height: 1.05; letter-spacing: -.02em; margin: 14px 0 6px -3px; animation: viber-in .5s .08s var(--ease-out, ease-out) both; }
+.viber-tagline { font-size: var(--fs-medium); line-height: 1.35; opacity: .9; max-width: 30em; animation: viber-in .5s .14s var(--ease-out, ease-out) both; }
+.viber-actions { display: flex; flex-direction: column; gap: 10px; animation: viber-in .5s .2s var(--ease-out, ease-out) both; }
+.viber-btn { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 60px; padding: 8px 16px; border: 2px solid var(--brand-fg); background: var(--brand); color: var(--brand-fg); text-align: left; font: inherit; cursor: pointer; }
+.viber-btn.primary { background: var(--brand-fg); color: var(--brand); }
+.viber-btn:active { opacity: .8; }
+.viber-btn-icon { display: flex; flex: none; }
+.viber-btn-text { display: flex; flex-direction: column; min-width: 0; }
+.viber-btn-label { font-size: var(--fs-large); font-family: var(--font-light); line-height: 1.15; text-transform: lowercase; }
+.viber-btn-sub { font-size: var(--fs-small); opacity: .75; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.viber-fallback { border-left: 4px solid var(--brand-fg); padding: 6px 0 6px 12px; animation: viber-in .3s both; }
+.viber-fallback[hidden] { display: none; }
+.viber-fb-text { font-size: var(--fs-normal); opacity: .9; margin-bottom: 6px; }
+.viber-fb-btn { background: none; border: 0; color: var(--brand-fg); font: inherit; font-size: var(--fs-medium); text-decoration: underline; padding: 4px 0; cursor: pointer; }
+.viber-tool { margin-top: 26px; padding-top: 4px; transition: background .3s; animation: viber-in .5s .26s var(--ease-out, ease-out) both; }
+.viber-tool.flash { background: rgba(255,255,255,.12); }
+.viber-tool-title { font-family: var(--font-light); font-size: var(--fs-xl); text-transform: lowercase; margin-bottom: 10px; }
+.viber-field { display: flex; align-items: stretch; background: rgba(255,255,255,.92); color: #111; margin-bottom: 8px; border: 2px solid transparent; }
+.viber-field:focus-within { background: #fff; border-color: rgba(0,0,0,.35); }
+.viber-prefix { display: flex; align-items: center; padding-left: 10px; color: #666; font-size: var(--fs-medium); }
+.viber-input { flex: 1; min-width: 0; width: 100%; border: 0; outline: 0; background: transparent; color: #111; font: inherit; font-size: var(--fs-medium); padding: 9px 10px; border-radius: 0; appearance: none; resize: none; }
+.viber-input::placeholder { color: #888; }
+.viber-tool-row { display: flex; align-items: center; justify-content: flex-end; gap: 14px; }
+.viber-count { font-size: var(--fs-small); opacity: .8; }
+.viber-count.low { font-weight: 700; opacity: 1; }
+.viber-go { min-height: 42px; padding: 4px 20px 6px; border: 2px solid var(--brand-fg); background: var(--brand); color: var(--brand-fg); font: inherit; font-size: var(--fs-normal); text-transform: lowercase; cursor: pointer; }
+.viber-go:active { background: var(--brand-fg); color: var(--brand); }
+.viber-foot { margin-top: auto; padding-top: 30px; font-size: var(--fs-small); opacity: .6; }
+@keyframes viber-pop { from { transform: scale(.6) rotateY(-60deg); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes viber-in { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (min-height: 760px) { .viber-hero { padding-top: 12vh; } }
+
+/* sections keep their natural height; the page scrolls instead of squeezing them into each other */
+.viber-link > * { flex-shrink: 0; }

@@ -1,0 +1,14 @@
+.mirror { position: absolute; inset: 0; background: #000; overflow: hidden; --ring: 0px; }
+.mirror.lit { background: #fff8ee; }
+.mirror-stage { position: absolute; inset: var(--ring); transition: inset .3s var(--ease-out, ease-out); overflow: hidden; background: #000; }
+.mirror.lit .mirror-stage { border-radius: 0; }
+.mirror-video, .mirror-still { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.mirror-video { transform: scaleX(-1); }
+.mirror-still[hidden], .mirror-badge[hidden], .mirror-msg[hidden] { display: none; }
+.mirror-badge { position: absolute; top: 14px; left: 14px; background: var(--accent); color: #fff; font-size: var(--fs-small); padding: 3px 10px 4px; text-transform: lowercase; }
+.mirror-msg { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 var(--m); color: #fff; font-size: var(--fs-normal); line-height: 1.4; gap: 10px; }
+.mirror-msg .wp-button { border-color: #fff; color: #fff; align-self: flex-start; }
+.mirror-msg-title { font-family: var(--font-light); font-size: var(--fs-xl); }
+.mirror.flash .mirror-stage::after { content: ''; position: absolute; inset: 0; background: #fff; opacity: .7; }
+.mirror .wp-appbar { transition: transform .25s var(--ease-out, ease-out), opacity .25s; }
+.mirror.chrome-hidden .wp-appbar { transform: translateY(100%); }

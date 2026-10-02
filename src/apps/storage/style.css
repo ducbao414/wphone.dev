@@ -1,0 +1,32 @@
+.storage-device { padding: 6px 0 14px; cursor: pointer; }
+.storage-device-top { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+.storage-device-icon { width: 52px; height: 52px; flex: none; display: flex; align-items: center; justify-content: center; background: var(--accent); color: #fff; }
+.storage-device-name { font-family: var(--font-light); font-size: var(--fs-xl); line-height: 1.1; }
+.storage-device-sub { color: var(--fg2); font-size: var(--fs-small); }
+.storage-device-hint { color: var(--fg2); font-size: var(--fs-small); margin-top: 8px; }
+
+.storage-bar { display: flex; height: 18px; background: var(--chrome2); overflow: hidden; margin: 6px 0 4px; }
+.storage-seg { height: 100%; flex: none; border-right: 1px solid var(--bg); }
+.storage-seg:last-child { border-right: 0; }
+
+.storage-card { margin: 18px 0 6px; }
+.storage-card-title { font-size: var(--fs-medium); color: var(--accent); margin-bottom: 2px; text-transform: lowercase; }
+.storage-ok { color: var(--fg); font-size: var(--fs-normal); margin: 6px 0; }
+.storage-kv { display: flex; justify-content: space-between; font-size: var(--fs-normal); padding: 4px 0; }
+.storage-kv span:last-child { color: var(--fg2); }
+.storage-quota-bar { margin: 8px 0 4px; }
+
+.storage-total { margin: 2px 0 8px; }
+.storage-total-num { font-family: var(--font-light); font-size: var(--fs-xl); }
+
+.storage-cat { display: flex; align-items: center; gap: 14px; min-height: 52px; }
+.storage-swatch { width: 26px; height: 26px; flex: none; }
+.storage-cat-name { font-family: var(--font-light); font-size: var(--fs-large); }
+.storage-cat-size { color: var(--fg2); font-size: var(--fs-normal); }
+
+.storage-file { display: flex; align-items: center; gap: 12px; min-height: 52px; }
+.storage-file.selected { background: transparent; }
+.storage-ficon { width: 46px; height: 46px; flex: none; display: flex; align-items: center; justify-content: center; background: var(--chrome2); background-size: cover; background-position: center; }
+.storage-fname { font-size: var(--fs-medium); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.storage-check { width: 28px; height: 28px; flex: none; border: 2px solid var(--fg); display: flex; align-items: center; justify-content: center; color: transparent; }
+.storage-file.selected .storage-check { background: var(--accent); border-color: var(--accent); color: #fff; }

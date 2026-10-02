@@ -1,0 +1,11 @@
+.calc { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--bg); padding-bottom: 30px; }
+.calc-display { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end; padding: 10px var(--m); min-height: 0; }
+.calc-expr { color: var(--fg2); font-size: 18px; min-height: 24px; word-break: break-all; text-align: right; }
+.calc-value { font-family: var(--font-light); font-weight: 300; font-size: 64px; line-height: 1.1; word-break: break-all; text-align: right; }
+.calc-keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; padding: 3px; flex: none; }
+.calc.sci .calc-keys { grid-template-columns: repeat(5, 1fr); }
+.calc-key { height: min(10.5vh, 74px); background: var(--chrome2); color: var(--fg); font-size: 26px; font-family: var(--font-light); }
+.calc.sci .calc-key { font-size: 20px; height: min(8.4vh, 62px); }
+.calc-key.num { background: var(--chrome); }
+.calc-key.eq { background: var(--accent); color: #fff; }
+.calc-key.pressed { background: var(--accent); color: #fff; }

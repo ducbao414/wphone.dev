@@ -1,0 +1,71 @@
+.camera { position: absolute; inset: 0; background: #000; color: #fff; overflow: hidden; container-type: size; }
+.camera-vf { position: absolute; inset: 0; overflow: hidden; touch-action: none; }
+.camera-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; transition: opacity .2s; }
+.camera-video.mirror { transform: scaleX(-1); }
+.camera.switching .camera-video { opacity: 0; }
+
+.camera-grid { position: absolute; inset: 0; pointer-events: none; }
+.camera-grid i { position: absolute; background: rgba(255, 255, 255, .45); }
+.camera-grid i:nth-child(1) { left: 33.333%; top: 0; bottom: 0; width: 1px; }
+.camera-grid i:nth-child(2) { left: 66.666%; top: 0; bottom: 0; width: 1px; }
+.camera-grid i:nth-child(3) { top: 33.333%; left: 0; right: 0; height: 1px; }
+.camera-grid i:nth-child(4) { top: 66.666%; left: 0; right: 0; height: 1px; }
+
+.camera-focus { position: absolute; width: 70px; height: 70px; margin: -35px 0 0 -35px; border: 2px solid #fff; opacity: 0; pointer-events: none; }
+.camera-focus.go { animation: camera-focus 1s ease-out forwards; }
+@keyframes camera-focus { 0% { opacity: 1; transform: scale(1.5); } 25% { transform: scale(1); border-color: #fff; } 50% { border-color: var(--accent); } 80% { opacity: 1; } 100% { opacity: 0; border-color: var(--accent); } }
+
+.camera-flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; z-index: 5; }
+.camera-flash.go { animation: camera-flash .35s ease-out; }
+@keyframes camera-flash { 0% { opacity: .95; } 100% { opacity: 0; } }
+
+.camera-count { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; font-family: var(--font-light); font-weight: 300; font-size: 140px; text-shadow: 0 0 20px rgba(0, 0, 0, .6); pointer-events: none; }
+.camera-count.show { display: flex; }
+.camera-count.pulse { animation: camera-pulse .9s ease-out; }
+@keyframes camera-pulse { from { transform: scale(1.4); opacity: .3; } to { transform: none; opacity: 1; } }
+
+.camera-rectime { position: absolute; top: 58px; left: 50%; transform: translateX(-50%); background: #e51400; color: #fff; font-size: 15px; padding: 2px 10px; display: none; font-variant-numeric: tabular-nums; }
+.camera.recording .camera-rectime { display: block; }
+
+/* top strip (portrait) */
+.camera-top { position: absolute; top: 0; left: 0; right: 0; height: 52px; display: flex; justify-content: space-around; align-items: center; background: linear-gradient(rgba(0, 0, 0, .45), transparent); z-index: 3; }
+.camera-ibtn { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #fff; position: relative; opacity: .9; }
+.camera-ibtn.on { color: var(--accent); filter: brightness(1.3); }
+.camera-ibtn b { position: absolute; bottom: 1px; right: 0; font-size: 10px; font-weight: 600; }
+.camera-ibtn:disabled { opacity: .3; }
+
+/* lenses */
+.camera-lenses { position: absolute; left: 0; right: 0; top: 52px; display: flex; gap: 10px; padding: 10px var(--m); background: rgba(0, 0, 0, .65); transform: translateY(-12px); opacity: 0; pointer-events: none; transition: .2s var(--ease-out); z-index: 3; overflow-x: auto; }
+.camera-lenses.open { transform: none; opacity: 1; pointer-events: auto; }
+.camera-lens { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: none; color: #fff; }
+.camera-lens-swatch { width: 58px; height: 58px; border: 2px solid transparent; background: linear-gradient(135deg, #e8553c 0 30%, #48a0dc 30% 60%, #5cb85c 60%); }
+.camera-lens.active .camera-lens-swatch { border-color: var(--accent); outline: 2px solid #fff; outline-offset: -5px; }
+.camera-lens-name { font-size: 12px; text-transform: lowercase; }
+
+/* bottom controls (portrait) */
+.camera-controls { position: absolute; left: 0; right: 0; bottom: 0; height: 110px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px 8px; background: linear-gradient(transparent, rgba(0, 0, 0, .55)); z-index: 3; }
+.camera-thumb { width: 52px; height: 52px; background: #222 center / cover no-repeat; border: 2px solid rgba(255, 255, 255, .85); display: flex; align-items: center; justify-content: center; color: #aaa; }
+.camera-thumb.pop { animation: camera-pop .45s var(--ease-out); }
+@keyframes camera-pop { from { transform: scale(.3) translateX(80px); opacity: 0; } to { transform: none; opacity: 1; } }
+.camera-shutter { width: 74px; height: 74px; border-radius: 50%; border: 3px solid #fff; display: flex; align-items: center; justify-content: center; }
+.camera-shutter-inner { width: 58px; height: 58px; border-radius: 50%; background: #fff; transition: .2s var(--ease-out); }
+.camera-shutter:active .camera-shutter-inner { transform: scale(.88); background: var(--accent); }
+.camera.video-mode .camera-shutter-inner { background: #e51400; }
+.camera.recording .camera-shutter-inner { width: 28px; height: 28px; border-radius: 3px; }
+.camera-mode { width: 52px; height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: #fff; }
+.camera-mode span { opacity: .45; line-height: 0; }
+.camera:not(.video-mode) .camera-mode-photo, .camera.video-mode .camera-mode-video { opacity: 1; color: var(--accent); filter: brightness(1.3); }
+.camera-mode:disabled { opacity: .35; }
+
+/* landscape: controls in a right-hand column like WP */
+@container (min-aspect-ratio: 1/1) {
+  .camera-top { top: 0; bottom: 0; left: 0; right: auto; width: 56px; height: auto; flex-direction: column; background: linear-gradient(90deg, rgba(0, 0, 0, .45), transparent); }
+  .camera-lenses { top: 0; left: 56px; }
+  .camera-controls { top: 0; bottom: 0; right: 0; left: auto; width: 110px; height: auto; flex-direction: column-reverse; padding: 24px 0; background: linear-gradient(90deg, transparent, rgba(0, 0, 0, .55)); }
+}
+
+/* error / fallback screen */
+.camera-error { position: absolute; inset: 0; z-index: 10; background: var(--bg); color: var(--fg); padding: 16px var(--m); overflow-y: auto; }
+.camera-error-title { font-family: var(--font-light); font-weight: 300; font-size: var(--fs-page-title); line-height: 1.1; margin: 4px 0 14px -2px; }
+.camera-error-msg { color: var(--fg2); font-size: var(--fs-medium); line-height: 1.4; margin: 0 0 18px; }
+.camera-error .wp-button { display: flex; width: 100%; margin: 0 0 10px; }

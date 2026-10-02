@@ -1,0 +1,18 @@
+/* Ringing screen (lives in #overlay-layer so it covers the lock screen too) */
+.alarms-ring { position: absolute; inset: 0; z-index: 90; background: var(--accent); color: #fff; display: flex; flex-direction: column; padding: 28px var(--m) 24px; animation: alarms-ring-in .35s var(--ease-out); user-select: none; }
+.alarms-ring.alarms-ring-out { animation: alarms-ring-out .25s var(--ease-in) forwards; }
+@keyframes alarms-ring-in { from { transform: perspective(900px) rotateX(-60deg); transform-origin: top; opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes alarms-ring-out { to { transform: translateY(-30%); opacity: 0; } }
+.alarms-ring-kind { font-size: var(--fs-app-title); font-weight: 600; letter-spacing: .04em; opacity: .9; }
+.alarms-ring-time { font-family: var(--font-light); font-weight: 300; font-size: clamp(64px, 24vw, 104px); line-height: 1; letter-spacing: -0.03em; margin: 14px 0 4px -4px; }
+.alarms-ring-ampm { font-size: .32em; margin-left: 8px; letter-spacing: 0; }
+.alarms-ring-label { font-size: var(--fs-xl); font-family: var(--font-light); line-height: 1.15; word-break: break-word; }
+.alarms-ring-date { font-size: var(--fs-medium); opacity: .8; margin-top: 6px; }
+.alarms-ring-pulse { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 80px; }
+.alarms-ring-pulse svg { animation: alarms-shake 1.1s infinite; }
+@keyframes alarms-shake { 0%, 50%, 100% { transform: rotate(0); } 10%, 30% { transform: rotate(-14deg); } 20%, 40% { transform: rotate(14deg); } }
+.alarms-ring-snoozepick { border: 2px solid rgba(255,255,255,.7); padding: 9px 12px; font-size: var(--fs-medium); margin-bottom: 14px; cursor: pointer; }
+.alarms-ring-btns { display: flex; gap: 12px; }
+.alarms-ring-btn { flex: 1; border: 2px solid #fff; color: #fff; min-height: 56px; font-size: var(--fs-large); font-family: var(--font-light); text-transform: lowercase; }
+.alarms-ring-btn.primary { background: #fff; color: var(--accent); font-family: var(--font); font-weight: 600; font-size: var(--fs-medium); }
+.alarms-ring-btn.pressed { opacity: .75; }

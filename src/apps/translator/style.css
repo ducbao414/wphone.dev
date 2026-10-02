@@ -1,0 +1,21 @@
+.translator-langs { display: flex; align-items: center; gap: 8px; margin: 4px 0 12px; }
+.translator-lang { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; text-align: left; border: 2px solid var(--fg3); padding: 4px 10px 6px; }
+.translator-lang-k { font-size: 11px; color: var(--fg2); }
+.translator-lang-v { font-size: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.translator-swap { width: 40px; height: 40px; flex: none; border: 2px solid var(--fg); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.translator-input { min-height: 110px; font-size: 18px; }
+.translator-count { font-size: 11px; color: var(--fg3); text-align: right; margin-top: 2px; }
+.translator-status { min-height: 4px; }
+.translator-error { font-size: 13px; color: var(--fg2); background: var(--chrome); padding: 8px 10px; margin: 8px 0; }
+.translator-listening { display: flex; align-items: center; gap: 6px; color: var(--accent); font-size: 15px; margin: 8px 0; }
+.translator-listening span { display: flex; animation: translator-pulse 1s infinite alternate; }
+@keyframes translator-pulse { to { opacity: .3; } }
+.translator-rhead { font-size: 12px; color: var(--accent); margin: 14px 0 4px; letter-spacing: .04em; min-height: 14px; }
+.translator-result { font-family: var(--font-light); font-size: 26px; line-height: 1.3; white-space: pre-wrap; word-break: break-word; min-height: 40px; }
+.translator-result.empty { color: var(--fg3); font-size: 20px; }
+.translator-brand { font-size: 11px; color: var(--fg3); margin-top: 20px; display: flex; align-items: center; gap: 4px; }
+.translator-brand span { display: flex; }
+.translator-hist { padding: 4px 0; }
+.translator-hist-langs { font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: .03em; }
+.translator-hist-src { font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.translator-hist-res { font-size: 20px; font-family: var(--font-light); color: var(--fg2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

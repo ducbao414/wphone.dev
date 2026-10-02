@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="description" content="A Windows Phone 8.1 experience in your browser — live tiles, apps, and your own private on-device storage." />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/icon-180.png" />
+  <title>Windows Phone</title>
+</head>
+<body>
+  <div id="device">
+    <div id="screen">
+      <div id="statusbar"></div>
+      <div id="viewport">
+        <div id="start-layer"></div>
+        <div id="app-layer"></div>
+        <div id="switcher-layer"></div>
+        <div id="actioncenter"></div>
+        <div id="lock-layer"></div>
+        <div id="overlay-layer"></div>
+        <div id="toast-layer"></div>
+      </div>
+      <div id="navbar"></div>
+      <div id="dim-layer"></div>
+    </div>
+    <div class="hw-btn hw-vol-up" title="Volume up"></div>
+    <div class="hw-btn hw-vol-down" title="Volume down"></div>
+    <div class="hw-btn hw-power" title="Power / lock"></div>
+    <div class="hw-btn hw-camera" title="Camera"></div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

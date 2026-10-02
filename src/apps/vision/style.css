@@ -1,0 +1,31 @@
+.vision { position: absolute; inset: 0; background: #000; color: #fff; overflow: hidden; }
+.vision-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; }
+.vision-shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(rgba(0,0,0,.55), transparent 22%, transparent 70%, rgba(0,0,0,.6)); }
+.vision-top { position: absolute; top: 0; left: 0; right: 0; padding: 16px var(--m) 0; }
+.vision-sub { font-family: var(--font-light); font-size: var(--fs-large); margin-top: 2px; opacity: .9; }
+.vision-frame { position: absolute; left: 50%; top: 44%; width: min(66vw, 260px); aspect-ratio: 1; transform: translate(-50%, -50%); pointer-events: none; }
+.vision-frame i { position: absolute; width: 34px; height: 34px; border: 0 solid #fff; }
+.vision-frame i:nth-child(1) { left: 0; top: 0; border-left-width: 4px; border-top-width: 4px; }
+.vision-frame i:nth-child(2) { right: 0; top: 0; border-right-width: 4px; border-top-width: 4px; }
+.vision-frame i:nth-child(3) { left: 0; bottom: 0; border-left-width: 4px; border-bottom-width: 4px; }
+.vision-frame i:nth-child(4) { right: 0; bottom: 0; border-right-width: 4px; border-bottom-width: 4px; }
+.vision-laser { position: absolute; left: 8%; right: 8%; height: 2px; background: var(--accent); box-shadow: 0 0 10px var(--accent); top: 50%; opacity: 0; }
+.vision.live:not(.unsupported):not(.has-result) .vision-laser { opacity: 1; animation: vision-scan 2.2s ease-in-out infinite alternate; }
+@keyframes vision-scan { from { top: 8%; } to { top: 92%; } }
+.vision.has-result .vision-frame { opacity: .3; }
+.vision-status { position: absolute; left: var(--m); right: var(--m); bottom: calc(var(--appbar-h) + 18px); font-size: var(--fs-normal); line-height: 1.4; text-align: center; text-shadow: 0 1px 3px #000; }
+.vision-status.warn { background: rgba(0,0,0,.75); padding: 10px 12px; text-align: left; border-left: 4px solid var(--accent); text-shadow: none; }
+.vision-status[hidden] { display: none; }
+.vision-result { position: absolute; left: 0; right: 0; bottom: var(--appbar-h); max-height: calc(100% - 120px); overflow-y: auto; background: var(--bg); color: var(--fg); padding: 16px var(--m) 14px; animation: vision-up .3s var(--ease-out, ease-out); z-index: 5; }
+.vision-result[hidden] { display: none; }
+@keyframes vision-up { from { transform: translateY(100%); } to { transform: none; } }
+.vision-card-head { display: flex; gap: 14px; align-items: center; }
+.vision-card-icon { width: 48px; height: 48px; flex: none; display: flex; align-items: center; justify-content: center; background: var(--accent); color: #fff; }
+.vision-card-type { font-size: var(--fs-large); font-family: var(--font-light); text-transform: lowercase; line-height: 1.1; }
+.vision-card-meta { font-size: var(--fs-small); color: var(--fg2); text-transform: lowercase; }
+.vision-card-body { margin: 14px 0 10px; font-size: var(--fs-medium); line-height: 1.35; white-space: pre-wrap; word-break: break-word; max-height: 30vh; overflow-y: auto; user-select: text; -webkit-user-select: text; }
+.vision-card-actions { display: flex; flex-direction: column; }
+.vision-action { text-align: left; background: none; border: 0; color: var(--accent); font: inherit; font-size: var(--fs-medium); padding: 9px 0; cursor: pointer; text-transform: lowercase; }
+.vision-dismiss { margin-top: 8px; border: 2px solid var(--fg); background: none; color: var(--fg); font: inherit; padding: 6px 18px 8px; min-height: 42px; cursor: pointer; }
+.vision-card.compact .vision-card-body { max-height: none; }
+.wp-page .vision-card-body { max-height: none; }

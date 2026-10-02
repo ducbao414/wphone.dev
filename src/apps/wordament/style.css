@@ -1,0 +1,77 @@
+.wordament-app { --wd-good: #4CA81E; --wd-dup: #E3B300; --wd-bad: #E51400; }
+
+/* ---- menu ---- */
+.wordament-logo { display: flex; gap: 6px; margin: 4px 0 10px; }
+.wordament-logo-tile { position: relative; width: 58px; height: 58px; background: var(--accent); color: #fff; font-size: 34px; display: flex; align-items: center; justify-content: center; font-family: var(--font-light); animation: wordament-drop .5s var(--ease-out) backwards; }
+.wordament-logo-tile i { position: absolute; top: 3px; right: 5px; font-size: 11px; font-style: normal; opacity: .85; }
+@keyframes wordament-drop { from { transform: perspective(500px) rotateX(-90deg); opacity: 0; } }
+.wordament-bestline { color: var(--fg2); font-size: var(--fs-small); margin-bottom: 16px; }
+
+/* ---- scores ---- */
+.wordament-hs-row { display: flex; align-items: center; gap: 14px; min-height: 52px; }
+.wordament-hs-rank { width: 46px; height: 46px; flex: none; background: var(--accent); color: #fff; font-size: 24px; font-family: var(--font-light); display: flex; align-items: center; justify-content: center; }
+.wordament-stat { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 9px 0; border-bottom: 1px solid color-mix(in srgb, var(--fg3) 40%, transparent); }
+.wordament-stat-k { color: var(--fg2); font-size: var(--fs-normal); }
+.wordament-stat-v { font-size: var(--fs-large); font-family: var(--font-light); text-align: right; }
+
+/* ---- game ---- */
+.wordament-game { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--bg); overflow: hidden; }
+.wordament-loading { padding: 16px var(--m); }
+.wordament-loading-text { font-family: var(--font-light); font-size: var(--fs-xl); margin: 30px 0 12px; }
+.wordament-top { display: flex; justify-content: space-between; align-items: flex-start; padding: 6px var(--m) 0; flex: none; }
+.wordament-scoreline { display: flex; align-items: baseline; gap: 10px; }
+.wordament-score { font-family: var(--font-light); font-size: 42px; line-height: 1.1; color: var(--accent); }
+.wordament-score.bump { animation: wordament-bump .3s var(--ease-out); }
+@keyframes wordament-bump { 40% { transform: scale(1.15); } }
+.wordament-count { color: var(--fg2); font-size: var(--fs-normal); }
+.wordament-time { font-family: var(--font-light); font-size: 42px; line-height: 1.1; margin-top: 16px; font-variant-numeric: tabular-nums; }
+.wordament-time.low { color: var(--wd-bad); animation: wordament-blink 1s steps(2) infinite; }
+@keyframes wordament-blink { 50% { opacity: .55; } }
+.wordament-word { height: 40px; line-height: 40px; padding: 0 var(--m); font-size: 24px; letter-spacing: .06em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: none; text-align: center; }
+.wordament-word.muted { color: var(--fg2); letter-spacing: 0; font-size: var(--fs-medium); }
+.wordament-word.good { color: var(--wd-good); }
+.wordament-word.dup { color: var(--wd-dup); }
+.wordament-word.bad { color: var(--wd-bad); }
+
+.wordament-gridbox { position: relative; flex: none; margin: 0 auto; width: min(calc(100% - 2 * var(--m)), 46vh, 420px); aspect-ratio: 1; }
+.wordament-grid { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, 1fr); gap: 6px; touch-action: none; cursor: pointer; }
+.wordament-tile { position: relative; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; transition: background .12s, transform .12s; pointer-events: none; }
+.wordament-letter { font-size: clamp(30px, 9vw, 46px); line-height: 1; font-family: var(--font); }
+.wordament-digraph { font-size: clamp(24px, 7vw, 36px); }
+.wordament-value { position: absolute; top: 4px; right: 6px; font-size: 12px; opacity: .9; }
+.wordament-tile.sel { background: #fff; color: #111; transform: scale(.94); }
+:root[data-theme='light'] .wordament-tile.sel { background: #222; color: #fff; }
+.wordament-tile.good { animation: wordament-good .45s; }
+.wordament-tile.dup { animation: wordament-dup .45s; }
+.wordament-tile.bad { animation: wordament-bad .45s; }
+@keyframes wordament-good { 0%, 60% { background: var(--wd-good); } }
+@keyframes wordament-dup { 0%, 60% { background: var(--wd-dup); } }
+@keyframes wordament-bad { 0%, 60% { background: var(--wd-bad); } 15% { transform: translateX(-3px); } 30% { transform: translateX(3px); } }
+.wordament-grid.over .wordament-tile { background: var(--chrome2); color: var(--fg3); transition: background .6s; }
+.wordament-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.wordament-line { fill: none; stroke: color-mix(in srgb, var(--accent) 70%, #000); stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; opacity: .55; }
+.wordament-cover { position: absolute; inset: 0; background: var(--chrome); display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: var(--font-light); font-size: var(--fs-xl); cursor: pointer; z-index: 2; }
+.wordament-cover-sub { font-family: var(--font); font-size: var(--fs-normal); color: var(--fg2); margin-top: 4px; }
+.wordament-intro { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--font-light); font-size: 120px; color: #fff; background: color-mix(in srgb, var(--bg) 55%, transparent); z-index: 3; pointer-events: none; }
+.wordament-intro.pop { animation: wordament-pop .6s var(--ease-out); }
+@keyframes wordament-pop { from { transform: scale(1.8); opacity: 0; } }
+
+.wordament-found-head { flex: none; padding: 12px var(--m) 4px; color: var(--fg2); font-size: var(--fs-small); text-transform: lowercase; }
+.wordament-found { flex: 1; min-height: 0; overflow-y: auto; padding: 0 var(--m) 16px; display: flex; flex-wrap: wrap; align-content: flex-start; gap: 6px; }
+.wordament-found-item { display: flex; gap: 6px; align-items: baseline; padding: 3px 8px; background: var(--chrome); font-size: var(--fs-normal); animation: wordament-drop .35s var(--ease-out); }
+.wordament-found-item b { color: var(--accent); font-weight: 600; font-size: 12px; }
+
+/* ---- results ---- */
+.wordament-results { position: absolute; inset: 0; }
+.wordament-res-big { font-family: var(--font-light); font-weight: 300; font-size: 88px; line-height: 1; color: var(--accent); margin-top: 6px; }
+.wordament-res-sub { font-size: var(--fs-medium); color: var(--fg2); margin-bottom: 10px; }
+.wordament-res-list { display: grid; grid-template-columns: 1fr 1fr; column-gap: 18px; }
+.wordament-res-word { display: flex; justify-content: space-between; align-items: baseline; padding: 6px 0; font-size: var(--fs-large); font-family: var(--font-light); cursor: pointer; border-bottom: 1px solid color-mix(in srgb, var(--fg3) 30%, transparent); }
+.wordament-res-word b { font-family: var(--font); font-weight: 400; font-size: var(--fs-small); color: var(--fg2); }
+.wordament-res-word.found b { color: var(--wd-good); }
+.wordament-mini { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; width: min(100%, 240px); margin: 16px 0 8px; }
+.wordament-mini-tile { position: relative; aspect-ratio: 1; background: var(--chrome2); color: var(--fg); display: flex; align-items: center; justify-content: center; font-size: 24px; }
+.wordament-mini-tile.on { background: var(--accent); color: #fff; }
+.wordament-mini-tile.first { background: var(--wd-good); }
+.wordament-mini-tile i { position: absolute; top: 2px; left: 4px; font-size: 11px; font-style: normal; opacity: .9; }
+.wordament-results .wordament-mini-tile { background: var(--accent); color: #fff; }

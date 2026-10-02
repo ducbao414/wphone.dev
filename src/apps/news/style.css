@@ -1,0 +1,28 @@
+.news-loading { margin: 0 0 8px; }
+.news-msg { font-size: 13px; color: var(--fg2); background: var(--chrome); padding: 8px 10px; margin: 2px 0 10px; line-height: 1.35; }
+.news-msg.plain { background: none; padding: 0; }
+.news-hero { position: relative; height: 210px; margin: 2px 0 12px; overflow: hidden; background: var(--chrome2); cursor: pointer; }
+.news-hero-img { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.news-hero-text { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 12px 10px; background: linear-gradient(transparent, rgba(0,0,0,.82)); color: #fff; }
+.news-hero-title { font-size: 21px; line-height: 1.2; font-weight: 600; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.news-hero-meta { font-size: 12px; opacity: .85; margin-top: 4px; }
+.news-item { display: flex; gap: 12px; align-items: flex-start; padding: 2px 0 4px; }
+.news-item-text { flex: 1; min-width: 0; }
+.news-item-title { font-size: 17px; line-height: 1.25; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.news-item-meta { font-size: 12px; color: var(--fg2); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.news-thumb { width: 92px; height: 64px; flex: none; background: var(--chrome2) center/cover; }
+
+.news-reader .wp-page-header { padding-bottom: 0; }
+.news-rsource { font-size: 12px; color: var(--accent); font-weight: 600; letter-spacing: .04em; }
+.news-rtitle { font-family: var(--font-light); font-weight: 300; font-size: 30px; line-height: 1.12; margin: 4px 0 8px; user-select: text; -webkit-user-select: text; }
+.news-rmeta { font-size: 12px; color: var(--fg2); margin-bottom: 12px; }
+.news-rhero { width: calc(100% + 2 * var(--m)); margin: 0 calc(-1 * var(--m)) 14px; display: block; background: var(--chrome2); max-height: 320px; object-fit: cover; }
+.news-rbyline { font-size: 13px; color: var(--fg2); margin-bottom: 12px; }
+.news-article { font-size: 16px; line-height: 1.6; user-select: text; -webkit-user-select: text; word-wrap: break-word; }
+.news-article.big { font-size: 19px; }
+.news-article p { margin: 0 0 14px; }
+.news-article ul { margin: 0 0 14px; padding-left: 20px; }
+.news-article li { margin-bottom: 6px; }
+.news-article h2, .news-article h3 { font-weight: 600; font-size: 1.15em; margin: 20px 0 8px; }
+.news-article blockquote { border-left: 3px solid var(--accent); margin: 0 0 14px; padding: 2px 0 2px 12px; color: var(--fg2); font-style: italic; }
+.news-rnote { font-size: 12px; color: var(--fg2); margin: 18px 0 6px; }

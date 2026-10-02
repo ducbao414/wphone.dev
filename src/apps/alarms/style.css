@@ -1,0 +1,57 @@
+/* ---------- alarm list ---------- */
+.alarms-next { color: var(--fg2); font-size: var(--fs-normal); margin: 2px 0 8px; }
+.alarms-list { display: flex; flex-direction: column; }
+.alarms-item { display: flex; align-items: center; gap: 12px; padding: 6px 0 12px; }
+.alarms-item-main { flex: 1; min-width: 0; cursor: pointer; }
+.alarms-item-time { font-family: var(--font-light); font-weight: 300; font-size: 54px; line-height: 1.05; letter-spacing: -0.03em; margin-left: -2px; }
+.alarms-item-ampm { font-size: 20px; letter-spacing: 0; margin-left: 6px; }
+.alarms-item-label { font-size: var(--fs-medium); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+.alarms-item-days { font-size: var(--fs-small); color: var(--fg2); margin-top: 1px; }
+.alarms-item-days.accent { color: var(--accent); }
+.alarms-item.off .alarms-item-time, .alarms-item.off .alarms-item-label { color: var(--fg3); }
+.alarms-item-toggle { flex: none; padding: 14px 0 14px 10px; cursor: pointer; }
+.alarms-switch-track { width: 64px; height: 28px; border: 2px solid var(--fg); position: relative; }
+.alarms-switch-track::before { content: ''; position: absolute; top: 3px; bottom: 3px; left: 3px; width: 0; background: var(--accent); transition: width .18s var(--ease-out); }
+.alarms-switch-thumb { position: absolute; top: -2px; left: -2px; width: 18px; height: 28px; background: var(--fg); transition: left .18s var(--ease-out); }
+.alarms-switch.on .alarms-switch-thumb { left: 42px; }
+.alarms-switch.on .alarms-switch-track::before { width: 38px; }
+.alarms-item.off .alarms-switch-track { border-color: var(--fg3); }
+.alarms-item.off .alarms-switch-thumb { background: var(--fg3); }
+.alarms-empty { padding: 18px 0; }
+.alarms-empty-title { font-family: var(--font-light); font-size: var(--fs-xl); color: var(--fg2); }
+.alarms-empty-sub { color: var(--fg2); font-size: var(--fs-normal); margin-top: 8px; line-height: 1.4; }
+.alarms-note { margin-top: 26px; font-size: 12px; color: var(--fg3); line-height: 1.4; cursor: pointer; }
+
+/* ---------- timer / stopwatch ---------- */
+.alarms-timer { padding-top: 10px; }
+.alarms-big { font-family: var(--font-light); font-weight: 300; font-size: clamp(60px, 21vw, 92px); line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; margin-left: -4px; cursor: pointer; white-space: nowrap; }
+.alarms-big.alarms-sw { font-size: clamp(52px, 18vw, 80px); cursor: default; }
+.alarms-big.alarms-dim { color: var(--fg2); }
+.alarms-big-sub { color: var(--fg2); font-size: var(--fs-medium); margin: 10px 0 4px; min-height: 22px; font-variant-numeric: tabular-nums; white-space: pre; }
+.alarms-timer-prog { margin-top: 14px; }
+.alarms-section-label { color: var(--accent); font-size: var(--fs-medium); margin: 26px 0 10px; text-transform: lowercase; }
+.alarms-presets { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; transition: opacity .2s; }
+.alarms-presets.alarms-disabled { opacity: .35; pointer-events: none; }
+.alarms-preset { aspect-ratio: 1; background: var(--chrome2); color: var(--fg); display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start; padding: 6px 8px; font-size: var(--fs-small); }
+.alarms-preset b { font-family: var(--font-light); font-weight: 300; font-size: 30px; line-height: 1; }
+.alarms-preset.pressed { background: var(--accent); color: #fff; }
+.alarms-hint { color: var(--fg3); font-size: var(--fs-small); margin-top: 16px; line-height: 1.4; }
+.alarms-dur { display: flex; gap: 10px; margin-bottom: 14px; }
+.alarms-dur label { flex: 1; display: flex; flex-direction: column; gap: 4px; color: var(--fg2); font-size: var(--fs-small); }
+.alarms-dur .wp-textbox { margin: 0; font-size: var(--fs-large); text-align: center; }
+
+.alarms-laps { margin-top: 18px; }
+.alarms-lap { display: grid; grid-template-columns: 52px 1fr 1fr; padding: 7px 0; font-size: var(--fs-medium); font-variant-numeric: tabular-nums; border-bottom: 1px solid color-mix(in srgb, var(--fg3) 35%, transparent); }
+.alarms-lap span:not(:first-child) { text-align: right; }
+.alarms-lap span:first-child { color: var(--fg2); }
+.alarms-lap-head { font-size: var(--fs-small); color: var(--fg2); border-bottom: 0; padding-bottom: 2px; }
+.alarms-lap.best span:nth-child(2) { color: var(--accent); }
+.alarms-lap.worst span:nth-child(2) { color: #e51400; }
+
+/* ---------- edit ---------- */
+.alarms-timebox { font-size: var(--fs-large); font-family: var(--font-light); }
+.alarms-until { margin: -8px 0 14px; }
+.alarms-soundrow { display: flex; gap: 10px; align-items: stretch; }
+.alarms-preview { width: 46px; flex: none; border: 2px solid var(--fg3); display: flex; align-items: center; justify-content: center; }
+.alarms-preview.playing { background: var(--accent); border-color: var(--accent); color: #fff; }
+.alarms-days .wp-check { font-size: var(--fs-large); font-family: var(--font-light); margin: 14px 0; }

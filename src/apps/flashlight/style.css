@@ -1,0 +1,17 @@
+.flashlight { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--bg); color: var(--fg); overflow: hidden; }
+.flashlight-head { padding: 16px var(--m) 0; }
+.flashlight-center { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; }
+.flashlight-power { width: min(56vw, 210px); height: min(56vw, 210px); border-radius: 50%; border: 4px solid var(--fg); color: var(--fg); background: transparent; display: flex; align-items: center; justify-content: center; transition: background .2s, border-color .2s, color .2s, transform .1s; cursor: pointer; }
+.flashlight-power:active { transform: scale(.96); }
+.flashlight-power.on { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 0 0 10px color-mix(in srgb, var(--accent) 25%, transparent); }
+.flashlight.lit .flashlight-power.on { box-shadow: 0 0 60px 20px color-mix(in srgb, var(--accent) 50%, transparent); }
+.flashlight-status { font-family: var(--font-light); font-size: var(--fs-xl); text-transform: lowercase; }
+.flashlight-modes { display: flex; justify-content: center; gap: 0; margin: 0 var(--m); }
+.flashlight-mode { flex: 1; max-width: 160px; min-height: 46px; border: 2px solid var(--fg); background: transparent; color: var(--fg); font: inherit; font-size: var(--fs-medium); cursor: pointer; }
+.flashlight-mode + .flashlight-mode { border-left: 0; }
+.flashlight-mode.active { background: var(--fg); color: var(--bg); }
+.flashlight-hint { color: var(--fg2); font-size: var(--fs-small); text-align: center; padding: 14px var(--m) 28px; }
+.flashlight-screen { position: absolute; inset: 0; z-index: 30; background: #000; display: flex; align-items: flex-end; justify-content: center; cursor: pointer; transition: background .05s; }
+.flashlight-screen[hidden] { display: none; }
+.flashlight-screen.lit { background: #fff; }
+.flashlight-screen-hint { margin-bottom: 36px; color: #888; font-size: var(--fs-small); padding: 6px 12px; mix-blend-mode: difference; }
