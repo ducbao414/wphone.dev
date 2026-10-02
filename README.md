@@ -9,6 +9,31 @@ A Windows Phone 8.1 simulator for the web, made for mobile browsers (on desktop 
 It is an entertainment project: live tiles, the lock screen with the Bing image of the day, Action Center, the task switcher,
 Cortana, Xbox games, and a private on-device file system — nothing a visitor creates ever leaves their browser.
 
+## Screenshots
+
+<p align="center"><img src="docs/screenshots/00-desktop.jpg" width="820" alt="The simulator on desktop, inside a Lumia-style frame"></p>
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/screenshots/01-lock.jpg" width="240" alt="Lock screen"><br><sub>Lock screen</sub></td>
+    <td align="center"><img src="docs/screenshots/02-start.jpg" width="240" alt="Start with live tiles"><br><sub>Start with live tiles</sub></td>
+    <td align="center"><img src="docs/screenshots/10-actioncenter.jpg" width="240" alt="Action Center"><br><sub>Action Center</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/05-weather.jpg" width="240" alt="Weather"><br><sub>Weather</sub></td>
+    <td align="center"><img src="docs/screenshots/07-cortana.jpg" width="240" alt="Cortana"><br><sub>Cortana</sub></td>
+    <td align="center"><img src="docs/screenshots/06-messaging.jpg" width="240" alt="Messaging"><br><sub>Messaging</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/11-people.jpg" width="240" alt="People"><br><sub>People</sub></td>
+    <td align="center"><img src="docs/screenshots/09-solitaire.jpg" width="240" alt="Solitaire"><br><sub>Solitaire</sub></td>
+    <td align="center"><img src="docs/screenshots/08-settings.jpg" width="240" alt="Settings"><br><sub>Settings</sub></td>
+  </tr>
+</table>
+
+<sub>On a phone it runs full screen (shots at 390×844); on desktop it sits inside a Lumia-style frame. Contacts, messages and
+headlines in these shots are fictional.</sub>
+
 ## Highlights
 
 - **The real WP 8.1 feel** — Metro typography, pivots and panoramas, turnstile and tile-flip animations, tilt on press,
