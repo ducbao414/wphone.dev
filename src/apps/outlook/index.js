@@ -562,15 +562,7 @@ export default async function launch(ctx) {
       await save();
       os.sounds.tap?.();
       os.toast('Message sent', 'outlook');
-      const handoff = prefs.deviceMail;
       page.close();
-      if (handoff) {
-        setTimeout(() => {
-          let body = msg.body;
-          if (attachments.length) body += `\n\n[Attachments not included: ${attachments.map((a) => a.name).join(', ')}]`;
-          try { os.device.email(to.list.map((p) => p.address).join(','), msg.subject, body); } catch {}
-        }, 400);
-      }
     }
 
     const bar = os.ui.appBar({
@@ -644,7 +636,6 @@ export default async function launch(ctx) {
     p.content.append(
       os.ui.header('account'), nameBox, addrBox,
       os.ui.header('sending'),
-      os.ui.toggle({ label: 'Also send through device mail app', value: prefs.deviceMail, description: 'After you tap send, your phone\'s own mail app opens with the message ready to go, so it really gets delivered. A copy is always kept in sent items. Attachments stay on this phone.', onChange: (v) => { prefs.deviceMail = v; savePrefs(); } }).el,
       sigBox,
       os.ui.header('reading'),
       os.ui.toggle({ label: 'Show message preview', value: prefs.preview, onChange: (v) => { prefs.preview = v; savePrefs(); changed(); } }).el,

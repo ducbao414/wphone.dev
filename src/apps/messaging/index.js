@@ -8,7 +8,7 @@ let S = null;            // storage handle (os.storage('messaging'))
 let OS = null;
 let threads = [];        // [{ key, name, messages: [{ id, from: 'me'|'them', text, image, path, time }], unread, draft, updated }]
 let contacts = [];
-let settings = { autoReply: true, deviceSms: false };
+let settings = { autoReply: true };
 let loaded = null;
 let viewing = null;      // thread key currently on screen (null when not foreground)
 const typing = new Set();
@@ -555,22 +555,13 @@ export default async function launch(ctx) {
       const text = box.value.trim();
       if (!text && !attachment) return;
       const name = recipient?.name;
-      const viaDevice = settings.deviceSms && isNumberKey(key);
-      const msg = { from: 'me', text, image: attachment?.image || null, path: attachment?.path || null, device: viaDevice || undefined };
+      const msg = { from: 'me', text, image: attachment?.image || null, path: attachment?.path || null };
       box.value = ''; attachment = null; renderAttach(); autoGrow(); updateCounter();
       const t = getThread(key, name); t.draft = ''; t.unread = 0;
       os.sounds.tap?.();
       await addMessage(key, msg, { name });
-      if (viaDevice) os.device.sms(key, text);
       scheduleReply(key, text, !!msg.image);
       updateBar();
-    }
-
-    function realSms() {
-      if (!isNumberKey(key)) return;
-      const t = thread();
-      const text = box.value.trim() || [...(t?.messages || [])].reverse().find((m) => m.from === 'me' && m.text)?.text || '';
-      os.device.sms(key, text);
     }
 
     const bar = appBar({});
@@ -584,7 +575,6 @@ export default async function launch(ctx) {
       ]);
       const c = key ? contactFor(key) : null;
       bar.setMenu([
-        ...(isNumberKey(key) ? [{ label: 'send as real SMS', onClick: realSms }] : []),
         ...(c ? [{ label: 'view contact', onClick: () => os.launch('people', { contact: c.id }) }] : []),
         ...(key && !c && isNumberKey(key) ? [{ label: 'save to people', onClick: () => os.launch('people', { add: { phone: key } }) }] : []),
         ...(key && thread() ? [{ label: os.tiles.isPinned('messaging', 'messaging:' + key) ? 'unpin from start' : 'pin to start', onClick: async () => {
@@ -685,8 +675,7 @@ export default async function launch(ctx) {
   function settingsPage(page) {
     const p = os.ui.page({ app: 'MESSAGING', title: 'settings' });
     const t1 = os.ui.toggle({ label: 'Replies from demo contacts', value: settings.autoReply, description: 'Contacts marked as demo in People text you back automatically, so you can try out messaging without a cellular network.', onChange: (v) => { settings.autoReply = v; S.set('settings', settings); } });
-    const t2 = os.ui.toggle({ label: 'Also send through device SMS app', value: settings.deviceSms, description: 'When you send a text to a phone number, also open your real phone’s messaging app with the message filled in.', onChange: (v) => { settings.deviceSms = v; S.set('settings', settings); } });
-    p.content.append(t1.el, t2.el,
+    p.content.append(t1.el,
       os.ui.header('storage'),
       os.ui.desc(`${threads.length} conversation${threads.length === 1 ? '' : 's'}, ${threads.reduce((s, t) => s + t.messages.length, 0)} messages`),
       os.ui.button('delete all conversations', async () => {

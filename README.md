@@ -26,6 +26,8 @@ Cortana, Xbox games, and a private on-device file system — nothing a visitor c
   - Flashlight, Compass, Bing Vision (QR/barcode scanner), Wikipedia, Unit Converter, Mirror
   - 22 social apps of the era (Facebook, Twitter, WhatsApp, Skype, YouTube, Vine…) as branded launchers that deep-link to the
     real app or website, each with a small built-in tool (compose a tweet, message a WhatsApp number, share a link…)
+- **Calls and texts stay in the simulator** — calling shows the WP in-call screen with ringback and a simulated answer, and texts
+  go to Messaging, on desktop and on phones alike; nothing is handed to the device's real dialer, SMS or mail app.
 - **A phone that feels alive** — 16 fictional contacts come with a call history, past text conversations and emails, and they
   text, email and call you now and then (Settings → notifications+actions → "Simulated friends" turns this off).
 
@@ -95,7 +97,6 @@ MyMemory, DuckDuckGo, radio-browser.info and the iTunes podcast directory. Maps 
 ## Known limitations
 
 - Alarms, reminders and simulated messages only run while the tab is open (browsers throttle background tabs).
-- Phone calls are simulated on desktop; on a phone, calling and texting hand off to the real dialer/SMS app.
 - Stock quotes use Yahoo's unofficial endpoint and can be flaky; translation can't auto-detect the source language.
 
 Windows Phone, Lumia, Xbox, Cortana and other names are trademarks of their respective owners. This is a fan-made tribute,

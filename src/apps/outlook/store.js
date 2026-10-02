@@ -10,7 +10,7 @@ export const FOLDERS = [
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 export const newId = uid;
 
-export const DEFAULT_PREFS = { deviceMail: true, signature: 'Sent from my Windows Phone', name: '', address: '', preview: true, digest: true, lastDigest: 0 };
+export const DEFAULT_PREFS = { signature: 'Sent from my Windows Phone', name: '', address: '', preview: true, digest: true, lastDigest: 0 };
 
 export function ownerAddress(name) {
   const base = String(name || 'lumia owner').toLowerCase().normalize('NFD').replace(/[^\w\s.]/g, '').trim().replace(/\s+/g, '.') || 'lumia.owner';

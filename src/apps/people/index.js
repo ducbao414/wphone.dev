@@ -449,9 +449,8 @@ export default async function launch(ctx) {
         { icon: UserPlus, label: isFav ? 'edit' : 'add', onClick: addMembers },
         { icon: MessageSquare, label: 'text', disabled: !numbers.length, onClick: async () => {
           if (numbers.length === 1) return os.launch('messaging', { to: numbers[0] });
-          const v = await ui.pickFromList({ title: 'text ' + g.name, options: [{ value: '__all', label: 'everyone (device sms)' }, ...members.filter((c) => c.phones[0]).map((c) => ({ value: c.phones[0].number, label: displayName(c) }))] });
-          if (v === '__all') os.device.sms(numbers.join(','));
-          else if (v) os.launch('messaging', { to: v });
+          const v = await ui.pickFromList({ title: 'text ' + g.name, options: [...members.filter((c) => c.phones[0]).map((c) => ({ value: c.phones[0].number, label: displayName(c) }))] });
+          if (v) os.launch('messaging', { to: v });
         } },
         { icon: Mail, label: 'email', disabled: !emails.length, onClick: () => os.launch('outlook', { to: emails.join('; ') }) },
         ...(isFav ? [] : [{ icon: I.pin, label: 'pin', onClick: () => pinGroup(g) }]),

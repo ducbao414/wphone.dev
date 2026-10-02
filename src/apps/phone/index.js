@@ -53,7 +53,6 @@ export default async function launch(ctx) {
 
   let contacts = await people.get('contacts', []);
   let history = await storage.get('history', []);
-  let deviceCalls = await storage.get('deviceCalls', true);
   let missedUnseen = await storage.get('missedUnseen', 0);
   let call = null;          // active call state
   const refreshers = new Set();
@@ -109,14 +108,8 @@ export default async function launch(ctx) {
     if (os.settings.get('airplane')) { ui.alert('Turn off airplane mode to make a call.', 'airplane mode'); return; }
     const c = (contactId && contacts.find((x) => x.id === contactId)) || contactFor(number);
     call = { number, contact: c || null, name: nameOf(c) || number, incoming, state: incoming ? 'connected' : 'calling', start: 0, muted: false, speaker: false, hold: false, digits: '', stopTone: null, timers: [] };
-    const realDevice = !incoming && deviceCalls && os.device.isMobile;
     renderCallScreen();
-    if (realDevice) {
-      call.viaDevice = true;
-      call.state = 'connected';
-      call.start = Date.now();
-      setTimeout(() => os.device.call(number), 250);
-    } else if (!incoming) {
+    if (!incoming) {
       // simulated network: ringback, then answer (or no answer)
       call.stopTone = cadence([440, 480], 2, 4);
       const known = !!c;
@@ -187,7 +180,7 @@ export default async function launch(ctx) {
     const contactsB = btn(Users, c.contact ? 'contact' : 'save', () => { minimizeCall(); if (call?.contact) os.launch('people', { contact: call.contact.id }); else os.launch('people', { add: { number: call.number } }); });
     const grid = el('div.phone-call-grid', speakerB, muteB, keypadB, holdB, addB, contactsB);
     const endB = el('button.phone-call-end.tilt', { onclick: endCall }, el('span', { html: ui.iconSVG(PhoneOff, { size: 24 }) }), 'end call');
-    const top = el('div.phone-call-top', el('div.phone-call-app', c.viaDevice || (deviceCalls && os.device.isMobile && !c.incoming) ? 'PHONE · VIA DEVICE' : 'PHONE'), nameEl, sub, status, digits);
+    const top = el('div.phone-call-top', el('div.phone-call-app', 'PHONE'), nameEl, sub, status, digits);
     callScreen = el('div.phone-call', bg, top, el('div.phone-call-bottom', keypad, grid, endB));
     callRefs = { status, holdB };
     root.append(callScreen);
@@ -490,7 +483,6 @@ export default async function launch(ctx) {
   function settingsPage(page) {
     const p = ui.page({ app: 'PHONE', title: 'settings' });
     p.content.append(
-      ui.toggle({ label: 'Use my device to place calls', value: deviceCalls, description: 'On a phone, calls are handed to your device’s real dialer (tel: link). On desktop, calls are always simulated.', onChange: async (v) => { deviceCalls = v; await storage.set('deviceCalls', v); } }),
       ui.listPicker({ label: 'Ringtone', options: os.sounds.ringtones, value: os.settings.get('ringtone'), onChange: (v) => { os.settings.set('ringtone', v); const t = os.sounds.play(v); setTimeout(() => t?.stop?.(), 4000); } }),
       ui.header('voicemail'),
       ui.desc('Voicemail number: 1 (long-press the 1 key).'),

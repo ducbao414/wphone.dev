@@ -149,9 +149,9 @@ export const device = new (class Device extends Emitter {
   async storageEstimate() { return (await navigator.storage?.estimate?.()) || { usage: 0, quota: 0 }; }
   async persistStorage() { return navigator.storage?.persist?.(); }
 
-  /** Make a real phone call / SMS / email via the device. */
-  call(number) { location.href = 'tel:' + String(number).replace(/[^\d+*#]/g, ''); }
-  sms(number, body = '') { location.href = `sms:${number}${body ? (/iPhone|iPad/.test(navigator.userAgent) ? '&' : '?') + 'body=' + encodeURIComponent(body) : ''}`; }
-  email(to, subject = '', body = '') { location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`; }
+  /** Calls, texts and email open the simulator's own Phone / Messaging / Outlook apps (never the real device's). */
+  call(number) { window.os?.launch('phone', { number: String(number) }); }
+  sms(number, body = '') { window.os?.launch('messaging', { to: String(number), body }); }
+  email(to, subject = '', body = '') { window.os?.launch('outlook', { to, subject, body }); }
   openUrl(url) { window.open(url, '_blank', 'noopener'); }
 })();
