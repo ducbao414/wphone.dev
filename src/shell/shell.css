@@ -200,7 +200,7 @@
 .vol-media-text { flex: 1; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* ================= OOBE ================= */
-.oobe { position: absolute; inset: 0; background: var(--accent); color: #fff; z-index: 200; }
+.oobe { position: absolute; inset: 0; background: var(--accent); color: #fff; z-index: 55; } /* below dialogs (70) and pickers (65) so they can open on top of setup */
 .oobe.oobe-out { animation: fade-out .3s forwards; }
 .oobe-page { position: absolute; inset: 0; padding: 30px var(--m); display: flex; flex-direction: column; overflow-y: auto; }
 .oobe-logo svg { width: 64px; height: 64px; margin: 40px 0 10px; }

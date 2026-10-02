@@ -43,7 +43,7 @@ export const install = new (class Install extends Emitter {
       return outcome;
     }
     const msg = this.isIOS
-      ? 'In Safari, tap the Share button (the square with an arrow at the bottom of the screen), then choose “Add to Home Screen”.\n\nYour phone will then open full screen, like a real Windows Phone.'
+      ? 'In Safari, tap the Share button (the square with an arrow — in the toolbar, or inside the ⋯ menu on newer iPhones), then choose “Add to Home Screen”.\n\nYour phone will then open full screen, like a real Windows Phone.'
       : 'Open your browser’s menu (⋮ or ⋯) and choose “Install app” or “Add to Home screen”.\n\nYour phone will then open full screen, like a real Windows Phone.';
     await os.ui.messageBox({ title: 'add to home screen', message: msg, buttons: ['got it'] });
     return 'instructions';
