@@ -146,8 +146,8 @@ export default async function launch(ctx) {
     ]);
 
     const fit = () => {
-      const r = boardWrap.getBoundingClientRect();
-      const s = Math.floor(Math.min(r.width, r.height));
+      // clientWidth/Height are layout sizes: unaffected by the page's turnstile-in transform (getBoundingClientRect isn't)
+      const s = Math.floor(Math.min(boardWrap.clientWidth, boardWrap.clientHeight));
       if (s > 0) { board.style.width = board.style.height = s + 'px'; board.style.setProperty('--ts', (s - 5 * gapPx(s)) / 4 + 'px'); board.style.setProperty('--gap', gapPx(s) + 'px'); }
     };
     const gapPx = (s) => Math.max(6, Math.round(s * 0.028));

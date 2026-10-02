@@ -291,7 +291,8 @@ export default async function launch(ctx) {
 
     /* ---- sizing */
     const fit = () => {
-      const r = lcdWrap.getBoundingClientRect();
+      // layout size (ignores the page's turnstile-in transform, unlike getBoundingClientRect)
+      const r = { width: lcdWrap.clientWidth, height: lcdWrap.clientHeight };
       if (!r.width || !r.height) return;
       const s = Math.min((r.width - 12) / LW, (r.height - 12) / LH);
       const dpr = Math.min(window.devicePixelRatio || 1, 3);
