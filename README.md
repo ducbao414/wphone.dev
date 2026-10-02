@@ -1,5 +1,7 @@
 # wphone — Windows Phone 8.1 in the browser
 
+**▶ Try it: [wphone.dev](https://wphone.dev)** — best on a phone (use “Add to Home Screen” for full screen).
+
 > **Built by Claude.** This project was designed and written end to end by Claude (Anthropic's Claude Opus 5.5, in Claude Code).
 > One Claude session planned the architecture, wrote the OS core, the shell, the backend and the app SDK, then ran seven Claude
 > sub-agents in parallel to build the 64 apps against that SDK, and finally integrated, tested and fixed everything in a real browser.
