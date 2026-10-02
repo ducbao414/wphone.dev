@@ -59,7 +59,11 @@ Desktop keyboard: `Esc`/`Backspace` = Back, `Home` = Start, `F2` = task switcher
 Long-press Back = task switcher, long-press Search = talk to Cortana, pull down the status bar = Action Center,
 long-press a tile = edit Start. On a phone, "Add to Home Screen" runs it full screen.
 
-## Deploy on a VPS (Node ≥ 20)
+## Deploy
+
+The same code deploys two ways: a Node server on a VPS, or a Cloudflare Worker.
+
+### Option A — VPS with Node (≥ 20)
 
 ```bash
 npm ci
@@ -77,13 +81,28 @@ wphone.example.com {
 
 Keep it running with pm2: `pm2 start server/index.js --name wphone` (set `PORT` as needed).
 
+### Option B — Cloudflare Workers (import the Git repo)
+
+1. In the Cloudflare dashboard go to **Workers & Pages → Create → Import a repository** and pick this GitHub repo.
+2. Use these build settings:
+   - **Build command:** `npm run build`
+   - **Deploy command:** `npx wrangler deploy`
+3. Deploy. Every push to `main` rebuilds and redeploys automatically.
+
+`wrangler.jsonc` serves the built `dist/` with Workers Static Assets (with single-page-app fallback) and runs the Worker
+only for `/api/*`. HTTPS comes for free on `*.workers.dev` or your own domain. The Worker gets the visitor's approximate
+city from Cloudflare itself, so no third-party IP lookup is made.
+
+To try the Worker locally: `npm run cf:dev` (http://localhost:8787). To deploy from your machine instead of Git: `npm run cf:deploy`.
+
 ## Architecture
 
-Vite + vanilla JavaScript (no framework) on the front end, [Hono](https://hono.dev) on Node for the backend.
+Vite + vanilla JavaScript (no framework) on the front end, [Hono](https://hono.dev) for the backend (runs on Node or Cloudflare Workers).
 
 ```
-server/            Hono backend: Bing image of the day, weather (Open-Meteo), geocoding, IP location, news/RSS, FX rates,
+server/app.js      shared Hono API (Web APIs only): Bing image of the day, weather (Open-Meteo), geocoding, IP location, news/RSS, FX rates,
                    stock quotes, translation, search/suggest, internet radio, podcasts, readable articles, sandboxed proxy
+server/index.js    Node entry (VPS): API + static dist/        server/worker.js   Cloudflare Workers entry (wrangler.jsonc)
 src/os/            the "OS": kernel (app lifecycle, back stack), fs (IndexedDB file system), settings, theme, tiles (live tiles),
                    notifications, media (background audio), device (Web API wrappers), net, pickers, sounds, ui (Metro controls)
 src/shell/         status bar, nav bar, lock screen, Start + app list, Action Center, task switcher, volume flyout, first run
