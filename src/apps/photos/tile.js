@@ -8,7 +8,8 @@ export default {
     if (size === 'small') return { faces: [] };
     const faces = [];
     for (const m of all.slice(0, 6)) {
-      const u = await os.fs.thumb(m.path).catch(() => null);
+      // 1024px tile-sized image: crisp on high-DPI phones without decoding full-resolution photos
+      const u = await os.fs.thumb(m.path, 1024).catch(() => null);
       if (u) faces.push({ image: u });
     }
     return { faces, iconFirst: false };

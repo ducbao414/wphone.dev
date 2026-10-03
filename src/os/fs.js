@@ -39,6 +39,11 @@ export const basename = (p) => normalize(p).split('/').pop();
 export const join = (...p) => normalize(p.join('/'));
 export const extname = (p) => { const b = basename(p); const i = b.lastIndexOf('.'); return i > 0 ? b.slice(i + 1).toLowerCase() : ''; };
 
+// Thumbnail sizes: 256 is the default (grids, lists); larger variants (e.g. 1024 for live tiles) are cached under "path@size".
+const THUMB_VARIANTS = [1024];
+const thumbKey = (path, max) => (max === 256 ? path : `${path}@${max}`);
+const thumbKeys = (path) => [path, ...THUMB_VARIANTS.map((v) => `${path}@${v}`)];
+
 const ROOT = { path: '/', parent: null, name: '', type: 'dir', created: 0, modified: 0 };
 
 class FileSystem extends Emitter {
@@ -93,7 +98,7 @@ class FileSystem extends Emitter {
     if (prev?.type === 'dir') throw new Error('Is a directory: ' + path);
     const now = Date.now();
     const meta = { ...(prev || {}), ...(extra || {}), path, parent: dirname(path), name: basename(path), type: 'file', mime: type, size: blob.size, created: prev?.created || now, modified: now };
-    await tx(['files', 'blobs', 'thumbs'], 'readwrite', (f, b, t) => { f.put(meta); b.put(blob, path); t.delete(path); });
+    await tx(['files', 'blobs', 'thumbs'], 'readwrite', (f, b, t) => { f.put(meta); b.put(blob, path); thumbKeys(path).forEach((k) => t.delete(k)); });
     this.#revoke(path);
     this.emit('change', { type: prev ? 'modify' : 'create', path });
     return meta;
@@ -120,19 +125,24 @@ class FileSystem extends Emitter {
     return u;
   }
 
-  /** Cached object URL of a JPEG thumbnail for an image (or video poster if stored). */
+  /**
+   * Cached object URL of a JPEG thumbnail for an image (or video poster if stored).
+   * max: 256 (default) or a larger variant such as 1024 for crisp live tiles on high-DPI screens.
+   */
   async thumb(path, max = 256) {
     path = normalize(path);
-    if (this.#thumbUrls.has(path)) return this.#thumbUrls.get(path);
-    let t = await idb.get('thumbs', path);
+    if (max !== 256 && !THUMB_VARIANTS.includes(max)) max = THUMB_VARIANTS.find((v) => v >= max) || 1024;
+    const key = thumbKey(path, max);
+    if (this.#thumbUrls.has(key)) return this.#thumbUrls.get(key);
+    let t = await idb.get('thumbs', key);
     if (!t) {
       const st = await this.stat(path);
-      if (!st?.mime?.startsWith('image/')) return null;
-      try { t = await makeThumbnail(await this.read(path), max); } catch { return this.url(path); }
-      await idb.set('thumbs', path, t);
+      if (!st?.mime?.startsWith('image/')) return max === 256 ? null : this.thumb(path); // e.g. video posters exist only at 256
+      try { t = await makeThumbnail(await this.read(path), max, max === 256 ? 0.8 : 0.88); } catch { return this.url(path); }
+      await idb.set('thumbs', key, t);
     }
     const u = URL.createObjectURL(t);
-    this.#thumbUrls.set(path, u);
+    this.#thumbUrls.set(key, u);
     return u;
   }
 
@@ -145,10 +155,9 @@ class FileSystem extends Emitter {
   }
 
   #revoke(path) {
-    for (const m of [this.#urls, this.#thumbUrls]) {
-      const u = m.get(path);
-      if (u) { URL.revokeObjectURL(u); m.delete(path); }
-    }
+    const drop = (m, k) => { const u = m.get(k); if (u) { URL.revokeObjectURL(u); m.delete(k); } };
+    drop(this.#urls, path);
+    for (const k of thumbKeys(path)) drop(this.#thumbUrls, k);
   }
 
   /** Delete file or folder (recursive). */
@@ -159,7 +168,7 @@ class FileSystem extends Emitter {
     if (!st) return;
     const all = st.type === 'dir' ? await this.walk(path) : [];
     const targets = [...all.map((x) => x.path), path];
-    await tx(['files', 'blobs', 'thumbs'], 'readwrite', (f, b, t) => { for (const p of targets) { f.delete(p); b.delete(p); t.delete(p); } });
+    await tx(['files', 'blobs', 'thumbs'], 'readwrite', (f, b, t) => { for (const p of targets) { f.delete(p); b.delete(p); thumbKeys(p).forEach((k) => t.delete(k)); } });
     targets.forEach((p) => this.#revoke(p));
     this.emit('change', { type: 'delete', path });
   }
@@ -209,7 +218,7 @@ class FileSystem extends Emitter {
     await tx(['files', 'blobs', 'thumbs'], 'readwrite', (f, b, t) => {
       for (const m of items) {
         const np = re(m.path);
-        f.delete(m.path); t.delete(m.path);
+        f.delete(m.path); thumbKeys(m.path).forEach((k) => t.delete(k));
         f.put({ ...m, path: np, parent: dirname(np), name: basename(np) });
         if (m.type === 'file') { b.delete(m.path); if (blobs.get(m.path)) b.put(blobs.get(m.path), np); }
       }
