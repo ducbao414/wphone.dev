@@ -202,13 +202,14 @@
 /* ================= OOBE ================= */
 .oobe { position: absolute; inset: 0; background: var(--accent); color: #fff; z-index: 55; } /* below dialogs (70) and pickers (65) so they can open on top of setup */
 .oobe.oobe-out { animation: fade-out .3s forwards; }
-.oobe-page { position: absolute; inset: 0; padding: 30px var(--m); display: flex; flex-direction: column; overflow-y: auto; }
+.oobe-page { position: absolute; inset: 0; padding: 30px var(--m) 0; display: flex; flex-direction: column; overflow-y: auto; }
 .oobe-logo svg { width: 64px; height: 64px; margin: 40px 0 10px; }
 .oobe-big { font-family: var(--font-light); font-weight: 300; font-size: 56px; line-height: 1.1; margin: 8px 0 18px; }
 .oobe-title { font-size: 14px; font-weight: 600; }
 .oobe p { font-size: 17px; line-height: 1.4; }
 .oobe .subtle { color: rgba(255,255,255,.8); }
-.oobe-actions { margin-top: auto; display: flex; justify-content: flex-end; padding-top: 20px; }
+/* actions stay pinned to the bottom of the screen, even when a step's content needs scrolling */
+.oobe-actions { margin-top: auto; display: flex; justify-content: flex-end; padding: 16px 0 calc(16px + env(safe-area-inset-bottom)); position: sticky; bottom: 0; background: var(--accent); }
 .oobe .wp-button { border-color: #fff; color: #fff; }
 .oobe .wp-button.accent { background: #fff; color: var(--accent); }
 .oobe-accents { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
@@ -221,3 +222,16 @@
 
 .oobe-install { margin-top: 6px; }
 .oobe-install p { margin-bottom: 6px; }
+
+/* short screens: tighter setup steps so everything (incl. the colour grid) fits without scrolling */
+@media (max-height: 760px) {
+  .oobe-page { padding-top: 18px; }
+  .oobe-logo svg { width: 48px; height: 48px; margin: 16px 0 6px; }
+  .oobe-big { font-size: 42px; margin: 4px 0 12px; }
+  .oobe p { font-size: 15px; margin: 8px 0; }
+  .oobe-accents { gap: 6px; }
+  .oobe-accent { aspect-ratio: 1.5; }
+  .oobe-accent-name { font-size: 18px; margin: 6px 0 8px; }
+  .oobe .wp-toggle { margin-bottom: 4px; }
+  .oobe .wp-toggle-state { font-size: 24px; }
+}

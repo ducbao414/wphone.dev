@@ -189,6 +189,24 @@ export default async function launch(ctx) {
     return n;
   }
 
+  /* ---------------- play button that follows playback + mini bar on sub-pages ---------------- */
+  const listIsCurrent = (list) => !!media.current?.path && list.some((s) => s.path === media.current.path);
+  /** App-bar button: pause/resume when this list is what's playing, otherwise play it from the top. */
+  function playToggle(getList, label = 'play') {
+    const on = listIsCurrent(getList()) && media.playing;
+    return { icon: on ? I.pause : I.play, label: on ? 'pause' : label, onClick: () => (listIsCurrent(getList()) ? media.toggle() : playSongs(getList())) };
+  }
+  /** Adds the now-playing mini bar to a page and keeps its app-bar buttons in sync with playback. Returns a disposer. */
+  function attachPlayback(p, bar, buttons, onUpdate) {
+    const mini = miniBar();
+    p.el.classList.add('music-has-mini');
+    p.el.append(mini, bar.el);
+    const upd = () => { bar.setButtons(buttons()); onUpdate?.(); };
+    upd();
+    const offs = [media.on('change', upd), media.on('track', upd)];
+    return () => { offs.forEach((f) => f()); mini.dispose(); };
+  }
+
   /* ---------------- hub ---------------- */
   function hubPage() {
     const views = {};
@@ -303,7 +321,12 @@ export default async function launch(ctx) {
     const p = os.ui.page({ app: 'MUSIC', title: '' });
     const wrap = el('div');
     p.content.append(wrap);
-    let album;
+    let album, heroBtn;
+    const syncHero = () => {
+      if (!heroBtn || !album) return;
+      const b = playToggle(() => album.songs);
+      heroBtn.replaceChildren(el('span', { html: iconSVG(b.icon, { size: 18 }) }), b.label);
+    };
     const draw = () => {
       album = groupAlbums(songs).find((a) => a.key === page.params.key);
       if (!album) { wrap.replaceChildren(os.ui.empty('album not found')); return; }
@@ -311,21 +334,24 @@ export default async function launch(ctx) {
       const meta = [album.artist, album.year, `${album.songs.length} song${album.songs.length > 1 ? 's' : ''}`].filter(Boolean).join(' • ');
       wrap.replaceChildren(
         el('div.music-album-head', artBox('music-album-hero', album.cover, 48), el('div.music-album-meta', el('div.music-album-hartist', album.artist), el('div.music-song-sub', meta),
-          os.ui.button('play', () => playSongs(album.songs), { icon: I.play }))),
+          heroBtn = os.ui.button('play', () => playToggle(() => album.songs).onClick(), { icon: I.play }))),
         songList(album.songs, { showAlbum: false, numbered: true }));
+      syncHero();
     };
+    const albumButtons = () => [
+      playToggle(() => album?.songs || []),
+      { icon: Shuffle, label: 'shuffle', onClick: () => playSongs(album.songs, 0, { shuffle: true }) },
+      { icon: ListPlus, label: 'add to', onClick: () => addToPlaylist(album.songs.map((s) => s.path)) },
+    ];
     const bar = os.ui.appBar({
-      buttons: [
-        { icon: I.play, label: 'play', onClick: () => playSongs(album.songs) },
-        { icon: Shuffle, label: 'shuffle', onClick: () => playSongs(album.songs, 0, { shuffle: true }) },
-        { icon: ListPlus, label: 'add to', onClick: () => addToPlaylist(album.songs.map((s) => s.path)) },
-      ],
+      buttons: [],
       menu: [{ label: 'pin to start', onClick: () => { ctx.pinTile({ key: 'music:album:' + page.params.key, title: album.title, args: { album: page.params.key } }); os.toast('Pinned'); } },
         { label: 'delete album', onClick: async () => { if (await deleteSongs(album.songs)) ctx.back(); } }],
     });
-    p.el.append(bar.el);
     draw();
-    return { el: p.el, onDestroy: onLib(draw) };
+    const offPlay = attachPlayback(p, bar, albumButtons, syncHero);
+    const offLib = onLib(draw);
+    return { el: p.el, onDestroy() { offPlay(); offLib(); } };
   }
 
   function artistPage(page) {
@@ -345,16 +371,16 @@ export default async function launch(ctx) {
       }
       p.content.append(grid, os.ui.header('songs'), songList(list));
     };
-    const bar = os.ui.appBar({
-      buttons: [
-        { icon: I.play, label: 'play all', onClick: () => playSongs(songs.filter((s) => s.artist === name)) },
-        { icon: Shuffle, label: 'shuffle', onClick: () => playSongs(songs.filter((s) => s.artist === name), 0, { shuffle: true }) },
-        { icon: I.search, label: 'web', onClick: () => os.launch('ie', { url: 'https://en.wikipedia.org/wiki/Special:Search?search=' + encodeURIComponent(name) }) },
-      ],
-    });
-    p.el.append(bar.el);
+    const artistSongs = () => songs.filter((s) => s.artist === name);
+    const bar = os.ui.appBar({ buttons: [] });
     draw();
-    return { el: p.el, onDestroy: onLib(draw) };
+    const offPlay = attachPlayback(p, bar, () => [
+      playToggle(artistSongs, 'play all'),
+      { icon: Shuffle, label: 'shuffle', onClick: () => playSongs(artistSongs(), 0, { shuffle: true }) },
+      { icon: I.search, label: 'web', onClick: () => os.launch('ie', { url: 'https://en.wikipedia.org/wiki/Special:Search?search=' + encodeURIComponent(name) }) },
+    ]);
+    const offLib = onLib(draw);
+    return { el: p.el, onDestroy() { offPlay(); offLib(); } };
   }
 
   function playlistPage(page) {
@@ -375,20 +401,22 @@ export default async function launch(ctx) {
       const v = await os.ui.pickFromList({ title: 'add a song', options: songs.filter((s) => !l.items.includes(s.path)).map((s) => ({ value: s.path, label: `${s.title} — ${s.artist}` })) });
       if (v) { l.items.push(v); savePlaylists(); }
     }
+    const plSongs = () => resolve(pl()?.items || []);
     const bar = os.ui.appBar({
-      buttons: [
-        { icon: I.play, label: 'play', onClick: () => playSongs(resolve(pl()?.items || [])) },
-        { icon: Shuffle, label: 'shuffle', onClick: () => playSongs(resolve(pl()?.items || []), 0, { shuffle: true }) },
-        { icon: I.add, label: 'add songs', onClick: addSongs },
-      ],
+      buttons: [],
       menu: [
         { label: 'rename', onClick: async () => { const l = pl(); const n = (await os.ui.prompt('Playlist name', l.name, 'rename'))?.trim(); if (n) { l.name = n; savePlaylists(); } } },
         { label: 'delete playlist', onClick: async () => { const l = pl(); if (await os.ui.confirm(`Delete playlist "${l.name}"?`, 'delete', 'delete', 'cancel')) { playlists = playlists.filter((x) => x !== l); await savePlaylists(); ctx.back(); } } },
       ],
     });
-    p.el.append(bar.el);
     draw();
-    return { el: p.el, onDestroy: onLib(draw) };
+    const offPlay = attachPlayback(p, bar, () => [
+      playToggle(plSongs),
+      { icon: Shuffle, label: 'shuffle', onClick: () => playSongs(plSongs(), 0, { shuffle: true }) },
+      { icon: I.add, label: 'add songs', onClick: addSongs },
+    ]);
+    const offLib = onLib(draw);
+    return { el: p.el, onDestroy() { offPlay(); offLib(); } };
   }
 
   /* ---------------- now playing ---------------- */
