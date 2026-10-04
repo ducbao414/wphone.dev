@@ -19,8 +19,8 @@
 .wp-pivot-headers { display: flex; gap: 22px; padding: 0 var(--m); white-space: nowrap; overflow: hidden; flex: none; }
 .wp-pivot-header { font-family: var(--font-light); font-weight: 300; font-size: var(--fs-pivot); line-height: 1.25; color: var(--fg3); cursor: pointer; text-transform: lowercase; letter-spacing: -0.02em; transition: color .2s; }
 .wp-pivot-header.active { color: var(--fg); }
-.wp-pivot-track { flex: 1; position: relative; overflow: hidden; }
-.wp-pivot-item { position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden; padding: 6px var(--m) calc(var(--appbar-h) + 24px); display: none; }
+.wp-pivot-track { flex: 1; position: relative; overflow: hidden; touch-action: pan-y; }
+.wp-pivot-item { position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden; touch-action: pan-y; padding: 6px var(--m) calc(var(--appbar-h) + 24px); display: none; }
 .wp-pivot-item.active { display: block; }
 .wp-pivot-item.slide-left { animation: pivot-in-left .35s var(--ease-out); }
 .wp-pivot-item.slide-right { animation: pivot-in-right .35s var(--ease-out); }

@@ -72,15 +72,54 @@ export function pivot({ app = '', items = [], index = 0, onChange } = {}) {
       listeners.forEach((fn) => fn(i, s));
     },
   };
-  // Swipe between items
-  let sx = null, sy = 0;
-  track.addEventListener('pointerdown', (e) => { sx = e.clientX; sy = e.clientY; });
-  track.addEventListener('pointerup', (e) => {
-    if (sx == null) return;
-    const dx = e.clientX - sx, dy = e.clientY - sy;
-    sx = null;
-    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.6 && !e.target.closest('.no-swipe, input[type=range], .leaflet-container')) api.select(cur + (dx < 0 ? 1 : -1), dx < 0 ? 'left' : 'right');
+  // Swipe between items. Pivot content is `touch-action: pan-y` (controls.css), so the browser keeps vertical
+  // scrolling but leaves horizontal finger movement to us instead of cancelling the pointer mid-swipe.
+  let g = null; // { x, y, t, id, axis }
+  const ignore = (t) => t.closest('.no-swipe, input, textarea, select, [contenteditable], .leaflet-container');
+  track.addEventListener('pointerdown', (e) => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    g = ignore(e.target) ? null : { x: e.clientX, y: e.clientY, t: performance.now(), id: e.pointerId, axis: null };
   });
+  track.addEventListener('pointermove', (e) => {
+    if (!g || e.pointerId !== g.id || g.axis) return;
+    const dx = e.clientX - g.x, dy = e.clientY - g.y;
+    if (Math.abs(dx) > 10 || Math.abs(dy) > 10) g.axis = Math.abs(dx) > Math.abs(dy) * 1.2 ? 'x' : 'y';
+    if (g.axis === 'x') {
+      // a sideways drag is a pivot swipe, not a press: release the tilt on whatever item it started on
+      track.querySelectorAll('.pressed').forEach((n) => { n.classList.remove('pressed'); n.style.transform = ''; });
+    }
+  });
+  // The release of a sideways drag must not "click" the item it started on (e.g. open an email)
+  const swallowClick = () => {
+    const stop = (ev) => { ev.stopPropagation(); ev.preventDefault(); };
+    track.addEventListener('click', stop, { capture: true, once: true });
+    setTimeout(() => track.removeEventListener('click', stop, { capture: true }), 400);
+  };
+  // Native drag-and-drop of links/images would cancel the gesture
+  track.addEventListener('dragstart', (e) => e.preventDefault());
+  const end = (e) => {
+    if (!g || e.pointerId !== g.id) return;
+    const s = g; g = null;
+    if (e.type === 'pointercancel' || s.axis === 'y') return;
+    const dx = e.clientX - s.x, dy = e.clientY - s.y, dt = performance.now() - s.t;
+    if (s.axis === 'x') swallowClick();
+    const flick = Math.abs(dx) > 30 && dt < 250; // quick flick, or a longer deliberate swipe
+    if ((Math.abs(dx) > 60 || flick) && Math.abs(dx) > Math.abs(dy) * 1.2) api.select(cur + (dx < 0 ? 1 : -1), dx < 0 ? 'left' : 'right');
+  };
+  track.addEventListener('pointerup', end);
+  track.addEventListener('pointercancel', end);
+  // Desktop: two-finger trackpad / Magic Mouse swipes arrive as horizontal wheel events, not pointer events.
+  // Accumulate deltaX, switch once past a threshold, then swallow the rest of that gesture (incl. momentum).
+  let wAcc = 0, wLocked = false, wIdle;
+  track.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) || e.ctrlKey) return; // vertical scroll / pinch-zoom: leave it alone
+    e.preventDefault();
+    clearTimeout(wIdle);
+    wIdle = setTimeout(() => { wAcc = 0; wLocked = false; }, 180); // gesture ended
+    if (wLocked) return;
+    wAcc += e.deltaMode === 1 ? e.deltaX * 16 : e.deltaX;
+    if (Math.abs(wAcc) > 70) { wLocked = true; api.select(cur + (wAcc > 0 ? 1 : -1), wAcc > 0 ? 'left' : 'right'); }
+  }, { passive: false });
   api.select(index);
   return api;
 }
