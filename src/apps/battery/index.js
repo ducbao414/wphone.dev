@@ -34,7 +34,7 @@ export default async function launch(ctx) {
     const note = el('div.wp-desc');
     const saverToggle = os.ui.toggle({
       label: 'Battery Saver', value: !!os.settings.get('batterySaver'),
-      description: 'Limits background activity, push and sync to make your battery last longer.',
+      description: 'Pauses simulated texts, emails and calls, refreshes live tiles less often and dims the screen a little. Apps, alarms, music and notifications keep working.',
       onChange: (v) => os.settings.set('batterySaver', v),
     });
     const thresholdPicker = os.ui.listPicker({
@@ -131,7 +131,7 @@ export default async function launch(ctx) {
     usageRefresh?.();
   }
   function help() {
-    os.ui.alert('Battery level and charging state come from your real device (where the browser supports it). Battery Saver dims colors slightly and signals apps to limit background work. Time left is estimated from how quickly your battery level drops.', 'battery saver');
+    os.ui.alert('Battery level and charging state come from your real device (where the browser supports it). Battery Saver pauses simulated texts, emails and calls, refreshes live tiles less often and dims the screen a little. Time left is estimated from how quickly your battery level drops.', 'battery saver');
   }
 
   offs.push(os.device.on('battery', () => overviewRefresh?.()));

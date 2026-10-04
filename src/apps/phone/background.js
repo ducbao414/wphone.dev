@@ -48,7 +48,7 @@ export default function start(os, { storage }) {
   const tick = async () => {
     try {
       // don't "ring" while someone is using the phone app or in airplane mode
-      if (os.settings.get('simActivity') !== false && !document.hidden && !os.settings.get('airplane') && !os.apps.running().includes('phone')) await missedCall(os, storage);
+      if (os.settings.get('simActivity') !== false && !os.settings.get('batterySaver') && !document.hidden && !os.settings.get('airplane') && !os.apps.running().includes('phone')) await missedCall(os, storage);
     } catch (e) { console.warn('phone sim', e); }
     setTimeout(tick, (18 + Math.random() * 25) * 60e3); // every 18–43 minutes
   };

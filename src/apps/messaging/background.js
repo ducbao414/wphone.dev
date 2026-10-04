@@ -10,7 +10,7 @@ export default function start(os, { storage }) {
   const next = () => setTimeout(tick, (5 + Math.random() * 9) * 60e3); // every 5–14 minutes
   const tick = async () => {
     try {
-      if (os.settings.get('simActivity') !== false && !document.hidden && !os.settings.get('airplane')) await simulateIncoming(os, storage);
+      if (os.settings.get('simActivity') !== false && !os.settings.get('batterySaver') && !document.hidden && !os.settings.get('airplane')) await simulateIncoming(os, storage);
     } catch (e) { console.warn('messaging sim', e); }
     next();
   };

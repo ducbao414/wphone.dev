@@ -139,6 +139,7 @@ export function initStart(os, shell) {
   /* ---------------- live tile flipping ---------------- */
   setInterval(() => {
     if (kernel.foreground || document.hidden || shell.isLocked?.() || editing) return;
+    if (settings.get('batterySaver') && Math.random() < 0.5) return; // Battery Saver: flip tiles half as often
     const cands = $$('.tile', grid).filter((n) => Number(n.dataset.faces) > 1);
     if (!cands.length) return;
     const n = cands[Math.floor(Math.random() * cands.length)];

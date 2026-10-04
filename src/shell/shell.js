@@ -106,7 +106,10 @@ export async function initShell(os) {
   });
 
   /* -------- brightness -------- */
-  settings.watch('brightness', (v) => ($('#dim-layer').style.opacity = String(1 - Math.max(0.15, v || 1))));
+  // Brightness setting, plus a slight extra dim while Battery Saver is on
+  const applyDim = () => ($('#dim-layer').style.opacity = String(Math.min(0.85, 1 - Math.max(0.15, settings.get('brightness') || 1) + (settings.get('batterySaver') ? 0.12 : 0))));
+  settings.watch('brightness', applyDim);
+  settings.on('change:batterySaver', applyDim);
   settings.watch('batterySaver', (v) => screen.classList.toggle('battery-saver', !!v));
 
   /* -------- sub-systems -------- */

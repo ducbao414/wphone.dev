@@ -44,7 +44,7 @@ export async function deliver(os, storage) {
 export default function start(os, { storage }) {
   const tick = async () => {
     try {
-      if (os.settings.get('simActivity') !== false && !document.hidden && !os.settings.get('airplane')) await deliver(os, storage);
+      if (os.settings.get('simActivity') !== false && !os.settings.get('batterySaver') && !document.hidden && !os.settings.get('airplane')) await deliver(os, storage);
     } catch (e) { console.warn('outlook sim', e); }
     setTimeout(tick, (12 + Math.random() * 20) * 60e3); // every 12–32 minutes
   };

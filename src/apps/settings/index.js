@@ -370,8 +370,11 @@ export default async function launch(ctx) {
     };
     draw();
     offs.push(os.device.on('battery', draw));
-    const saver = bindToggle(offs, 'batterySaver', 'Battery Saver', 'Limits background activity and dims the screen to make your battery last longer.', async (v) => { if (!v) await storage.set('saverAuto', false); });
-    const auto = ui.checkbox({ label: 'Turn on automatically if my battery falls below 20%', checked: await storage.get('autoSaver', true), onChange: (v) => storage.set('autoSaver', v) });
+    const saver = bindToggle(offs, 'batterySaver', 'Battery Saver', 'Pauses simulated texts, emails and calls, refreshes live tiles less often and dims the screen a little. Apps, alarms, music and notifications keep working.');
+    // The Battery Saver app owns the automatic switch-on (its background service); share its settings.
+    const batStore = os.storage('battery');
+    const pctLow = Math.round((await batStore.get('threshold', 0.2)) * 100);
+    const auto = ui.checkbox({ label: `Turn on automatically if my battery falls below ${pctLow}%`, checked: await batStore.get('auto', true), onChange: (v) => batStore.set('auto', v) });
     c.append(big, saver.el, auto, el('div.settings-gap'), link('battery use', 'see which apps use the most battery', () => os.launch('battery')));
   });
 

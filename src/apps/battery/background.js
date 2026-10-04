@@ -41,7 +41,7 @@ export default function start(os, { storage }) {
       if (auto && !saver && b.level <= threshold && !(await storage.get('suppressed', false))) {
         await storage.set('autoOn', true);
         await os.settings.set('batterySaver', true);
-        os.notify({ appId: 'battery', title: 'Battery Saver is on', body: `Battery is at ${Math.round(b.level * 100)}%. Some background activity is limited.` });
+        os.notify({ appId: 'battery', title: 'Battery Saver is on', body: `Battery is at ${Math.round(b.level * 100)}%. Simulated activity is paused and live tiles update less often.` });
       }
     } finally { busy = false; }
   }

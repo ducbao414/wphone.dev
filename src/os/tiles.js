@@ -83,7 +83,9 @@ class Tiles extends Emitter {
     const p = await this.#provider(t.id);
     if (!p?.update) return;
     this.#run(t);
+    let tick = 0;
     this.#timers.set(k, setInterval(() => {
+      if (settings.get('batterySaver') && tick++ % 2) return; // Battery Saver: refresh half as often
       const cur = this.layout().find((x) => tileKey(x) === k);
       if (cur) this.#run(cur); else { clearInterval(this.#timers.get(k)); this.#timers.delete(k); }
     }, p.interval || 30 * 60e3));
