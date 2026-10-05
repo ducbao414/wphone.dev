@@ -22,6 +22,8 @@
 .wp-pivot-track { flex: 1; position: relative; overflow: hidden; touch-action: pan-y; }
 .wp-pivot-item { position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden; touch-action: pan-y; padding: 6px var(--m) calc(var(--appbar-h) + 24px); display: none; }
 .wp-pivot-item.active { display: block; }
+/* sections containing text fields keep default touch handling so the iOS keyboard always opens (swipe the headers there) */
+.wp-pivot-item:has(input:not([type=range]):not([type=checkbox]):not([type=radio]), textarea, [contenteditable]) { touch-action: auto; }
 .wp-pivot-item.slide-left { animation: pivot-in-left .35s var(--ease-out); }
 .wp-pivot-item.slide-right { animation: pivot-in-right .35s var(--ease-out); }
 @keyframes pivot-in-left { from { transform: translateX(60%); opacity: 0; } to { transform: none; opacity: 1; } }
