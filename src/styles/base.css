@@ -59,7 +59,7 @@ html, body {
   background: #111; color: var(--fg);
   font-family: var(--font); font-size: calc(var(--fs-normal) * var(--font-scale));
   -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent;
-  overscroll-behavior: none;
+  overscroll-behavior: none; touch-action: manipulation;
   user-select: none; -webkit-user-select: none;
 }
 input, textarea, [contenteditable], .selectable { user-select: text; -webkit-user-select: text; }
@@ -74,9 +74,3 @@ img { -webkit-user-drag: none; }
 .light { font-family: var(--font-light); font-weight: 300; }
 ::-webkit-scrollbar { width: 0; height: 0; }
 * { scrollbar-width: none; }
-
-/* touch-action is scoped to tappable elements only (no double-tap-zoom delay on them).
-   A global touch-action on html/body stops iOS home-screen web apps from showing the keyboard,
-   and touch-action on any ancestor of a text field applies to the field too. */
-button, a, .tilt, .tile, [role="button"], .wp-button, .wp-appbar-btn, .wp-appbar-dots, .wp-toggle-row, .nav-btn, .hw-btn { touch-action: manipulation; }
-input, textarea, select, [contenteditable] { touch-action: auto; }
