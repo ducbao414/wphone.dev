@@ -39,3 +39,8 @@
 
 /* sections keep their natural height; the page scrolls instead of squeezing them into each other */
 .shazam-link > * { flex-shrink: 0; }
+
+/* framed site (CFG.frame) */
+.shazam-framewrap { position: absolute; inset: 0; background: #fff; }
+.shazam-frame { position: absolute; left: 0; top: 0; width: 100%; height: calc(100% - 30px); border: 0; display: block; }
+.shazam-frame-loading { position: absolute; top: 0; left: 0; right: 0; }

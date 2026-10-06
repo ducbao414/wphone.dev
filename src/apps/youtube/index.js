@@ -15,6 +15,7 @@ export default async function launch(ctx) {
   const CFG = {
     tagline: "Watch, listen and stream the world’s videos.",
     web: "https://m.youtube.com",
+    frame: null, // site shown inside the app when it allows framing; null = landing page only
     deep: /iPhone|iPad|iPod/.test(navigator.userAgent) ? 'youtube://' : 'vnd.youtube://',
     tool: {
     title: "search videos",
@@ -126,7 +127,26 @@ export default async function launch(ctx) {
     el('div.' + P + '-foot', manifest.publisher));
   view.style.setProperty('--brand', manifest.color);
   view.style.setProperty('--brand-fg', '#fff');
-  root.append(view);
+  if (CFG.frame) {
+    // The site allows framing: show it inside the phone. Sandboxed so it can't navigate wphone itself away.
+    const frame = el('iframe.' + P + '-frame', {
+      src: CFG.frame, title: manifest.name, referrerpolicy: 'no-referrer', allow: 'autoplay; fullscreen; encrypted-media',
+      sandbox: 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox',
+    });
+    const loading = os.ui.loadingDots();
+    loading.classList.add(P + '-frame-loading');
+    frame.addEventListener('load', () => loading.remove());
+    const bar = os.ui.appBar({
+      minimized: true,
+      menu: [
+        { label: 'open in browser', onClick: () => openWeb(CFG.web) },
+        { label: 'about ' + manifest.name.toLowerCase(), onClick: () => ctx.navigate(() => view) },
+      ],
+    });
+    root.append(el('div.' + P + '-framewrap', frame, loading, bar.el));
+  } else {
+    root.append(view);
+  }
 
   applyShare(ctx.args?.share);
   ctx.on('args', (a) => applyShare(a?.share));
