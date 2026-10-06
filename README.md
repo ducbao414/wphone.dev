@@ -145,6 +145,9 @@ MyMemory, DuckDuckGo, radio-browser.info and the iTunes podcast directory. Maps 
 
 - Alarms, reminders and simulated messages only run while the tab is open (browsers throttle background tabs).
 - Stock quotes use Yahoo's unofficial endpoint and can be flaky; translation can't auto-detect the source language.
+- On iOS 18 the on-screen keyboard may not appear in the home-screen (installed) version — an iOS bug that affects
+  every installed web app ([WebKit #279904](https://bugs.webkit.org/show_bug.cgi?id=279904)). Typing works when the
+  simulator is opened in Safari.
 
 Windows Phone, Lumia, Xbox, Cortana and other names are trademarks of their respective owners. This is a fan-made tribute,
 not affiliated with Microsoft or Nokia.
